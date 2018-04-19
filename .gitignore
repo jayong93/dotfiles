@@ -1,4 +1,4 @@
-docker/pure-ftp/log/*
+docker/pure-ftp/logs/*
 docker/pure-ftp/private/*
 docker/pure-ftp/passwd/*
 docker/qbittorrent/config/*
