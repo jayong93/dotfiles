@@ -15,13 +15,26 @@ echo "==========================="
 
 # custom installation (include oh-my-zsh)
 for CUSTOM_APP in `find "$DOTFILES_DIR/custom_install" -type f`; do
-    echo "[INFO] Install $(basename "$CUSTOM_APP")"
+    APP_NAME=$(basename "$CUSTOM_APP")
+    APP_NAME=${APP_NAME%.*}
+    echo "[INFO] Install $APP_NAME"
     (/bin/sh "$CUSTOM_APP" &&
-        echo "[INFO] $(basename "$CUSTOM_APP") has been installed") ||
-        echo "[INFO] $(basename "$CUSTOM_APP") has been failed installing"
+        echo "[INFO] $APP_NAME has been installed") ||
+        echo "[INFO] $APP_NAME has been failed installing"
 done
 echo "==========================="
 echo "[INFO] Custom installation is done"
 echo "==========================="
 
 ln -sfv "$DOTFILES_DIR/rc/.zprofile" ~
+ln -sfv "$DOTFILES_DIR/rc/.vimrc" ~
+
+# do post-process
+POST_SCRIPT="$DOTFILES_DIR/postprocess.sh"
+echo "==========================="
+echo "[INFO] Do Postprocess"
+echo "==========================="
+/bin/bash "$POST_SCRIPT"
+echo "==========================="
+echo "[INFO] Done!"
+echo "==========================="
