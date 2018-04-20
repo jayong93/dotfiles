@@ -1,7 +1,5 @@
 CURRENT_SCRIPT=${(%):-%N}
 READLINK=$(which readlink)
-echo $CURRENT_SCRIPT
-echo $READLINK
 
 if [[ -n $CURRENT_SCRIPT && -x $READLINK ]]; then
     SCRIPT_PATH=$(readlink -f "$CURRENT_SCRIPT")
@@ -14,7 +12,6 @@ else
 fi
 
 for DOTFILE in "$DOTFILES_DIR"/system/{alias,env}; do
-    echo $DOTFILE
     [ -f "$DOTFILE" ] && source "$DOTFILE"
 done
 
