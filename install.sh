@@ -3,7 +3,7 @@
 CURRENT_SCRIPT=$0
 DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# apt를 사용해 패키지 설치 (include zsh)
+# installation by apt (include zsh)
 echo "==========================="
 echo "[INFO] Start installation by apt"
 echo "==========================="
@@ -26,6 +26,7 @@ echo "==========================="
 echo "[INFO] Custom installation is done"
 echo "==========================="
 
+# link runcom files
 ln -sfv "$DOTFILES_DIR/rc/.zprofile" ~
 ln -sfv "$DOTFILES_DIR/rc/.vimrc" ~
 

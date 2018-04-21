@@ -1,3 +1,4 @@
+# determine dotfiles directory path
 CURRENT_SCRIPT=${(%):-%N}
 READLINK=$(which readlink)
 
@@ -11,10 +12,10 @@ else
     return
 fi
 
+# source all separated partial rc files
 for DOTFILE in "$DOTFILES_DIR"/system/{alias,env}; do
     [ -f "$DOTFILE" ] && source "$DOTFILE"
 done
 
 unset READLINK CURRENT_SCRIPT SCRIPT_PATH DOTFILE
-
 export DOTFILES_DIR
