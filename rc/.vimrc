@@ -4,6 +4,7 @@ Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'vim-airline/vim-airline'
 Plug 'scrooloose/syntastic'
 Plug 'jiangmiao/auto-pairs'
+Plug 'easymotion/vim-easymotion'
 call plug#end()
 
 syntax on
@@ -33,7 +34,7 @@ let g:airline#extensions#tabline#enabled=1
 
 " syntastic 설정
 set statusline+=%#warningmsg#
-set statusline+=%{SystasticStatuslineFlag()}
+set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 let g:syntastic_always_populate_loc_list=1
 let g:syntastic_auto_loc_list=1
