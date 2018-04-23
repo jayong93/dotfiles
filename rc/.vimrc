@@ -5,6 +5,8 @@ Plug 'vim-airline/vim-airline'
 Plug 'scrooloose/syntastic'
 Plug 'jiangmiao/auto-pairs'
 Plug 'easymotion/vim-easymotion'
+Plug 'tpope/vim-surround'
+Plug 'scrooloose/nerdcommenter'
 call plug#end()
 
 syntax on
@@ -25,6 +27,7 @@ set lazyredraw
 set history=1000
 set nobackup
 set noswapfile
+set showcmd
 filetype indent on
 
 set fileencodings=utf8,euc-kr
@@ -40,3 +43,6 @@ let g:syntastic_always_populate_loc_list=1
 let g:syntastic_auto_loc_list=1
 let g:syntastic_check_on_open=1
 let g:syntastic_check_on_wq=0
+let g:syntastic_python_checkers=['pylint']
+let g:syntastic_python_pylint_exec="pylint3"
+let g:syntastic_python_pylint_args="-E"
