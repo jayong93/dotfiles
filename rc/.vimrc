@@ -30,8 +30,10 @@ set noswapfile
 set showcmd
 filetype indent on
 
-" Windows용 gvim 폰트 설정
+" Windows용 gvim 설정
 set gfn=D2Coding:h11:cHANGEUL:qDRAFT
+set lines=40
+set columns=150
 
 set fileencodings=utf8,euc-kr
 
