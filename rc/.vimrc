@@ -30,6 +30,9 @@ set noswapfile
 set showcmd
 filetype indent on
 
+" Windows용 gvim 폰트 설정
+set gfn=D2Coding:h11:cHANGEUL:qDRAFT
+
 set fileencodings=utf8,euc-kr
 
 " vim 상단에 버퍼들 표시
