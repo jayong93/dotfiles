@@ -8,6 +8,7 @@ Plug 'easymotion/vim-easymotion'
 Plug 'tpope/vim-surround'
 Plug 'scrooloose/nerdcommenter'
 Plug 'junegunn/fzf'
+Plug 'tpope/vim-fugitive'
 call plug#end()
 
 syntax on
