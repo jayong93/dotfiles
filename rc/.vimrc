@@ -36,8 +36,9 @@ filetype indent on
 set gfn=D2Coding:h11:cHANGEUL:qDRAFT
 set lines=40
 set columns=150
+set encoding=utf-8 " GVim의 인코딩을 유니코드로 설정
 
-set fileencodings=utf8,euc-kr
+set fileencodings=utf-8,euc-kr
 
 " vim 상단에 버퍼들 표시
 let g:airline#extensions#tabline#enabled=1
