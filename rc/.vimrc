@@ -7,6 +7,7 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'easymotion/vim-easymotion'
 Plug 'tpope/vim-surround'
 Plug 'scrooloose/nerdcommenter'
+Plug '~/.fzf'
 call plug#end()
 
 syntax on
