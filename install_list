@@ -3,3 +3,5 @@ sudo
 software-properties-common
 zsh
 vim
+openssh-server
+byobu
