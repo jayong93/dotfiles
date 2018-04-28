@@ -15,7 +15,7 @@ echo "==========================="
 
 # add user and group for qbittorrent and the files which is downloaded via it
 sudo groupadd qbtuser -g 9999
-sudo useradd qbtuser -s /usr/sbin/nologin
+sudo useradd qbtuser -g qbtuser -s /usr/sbin/nologin
 
 # custom installation (include oh-my-zsh)
 for CUSTOM_APP in `find "$DOTFILES_DIR/custom_install" -type f`; do

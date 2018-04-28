@@ -22,4 +22,4 @@ sudo chmod +x /usr/local/bin/docker-compose
 # make env file for docker-compose
 echo "QBT_UID=$(id -u qbtuser)\nQBT_GID=$(id -g qbtuser)" > ${DOTFILES_DIR}/docker/.env
 
-sudo docker-compose -d up
+cd ${DOTFILES_DIR}/docker && sudo docker-compose -d up

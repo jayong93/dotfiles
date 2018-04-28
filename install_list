@@ -1,5 +1,6 @@
-coreutils
 sudo
+git
+coreutils
 software-properties-common
 zsh
 vim
