@@ -7,7 +7,7 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'easymotion/vim-easymotion'
 Plug 'tpope/vim-surround'
 Plug 'scrooloose/nerdcommenter'
-Plug '~/.fzf'
+Plug 'junegunn/fzf'
 Plug 'tpope/vim-fugitive'
 call plug#end()
 
