@@ -9,6 +9,7 @@ Plug 'tpope/vim-surround'
 Plug 'scrooloose/nerdcommenter'
 Plug 'junegunn/fzf'
 Plug 'tpope/vim-fugitive'
+Plug 'terryma/vim-multiple-cursors'
 call plug#end()
 
 syntax on
