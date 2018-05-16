@@ -1,6 +1,6 @@
 docker/pure-ftp/logs/*
 docker/pure-ftp/private/*
 docker/pure-ftp/passwd/*
-docker/qbittorrent/config/*
-docker/qbittorrent/watch/*
-
+docker/qbittorrent/config/Downloads/*
+docker/qbittorrent/config/data/*
+docker/.env

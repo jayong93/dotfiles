@@ -1,24 +1,28 @@
 #!/bin/bash
 
 CURRENT_SCRIPT=$0
-DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+export DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # installation by apt (include zsh)
 echo "==========================="
 echo "[INFO] Start installation by apt"
 echo "==========================="
-apt update
-xargs -r -a "${DOTFILES_DIR}/install_list" apt install -y --fix-missing
+sudo apt update
+xargs -r -a "${DOTFILES_DIR}/install_list" sudo apt install -y --fix-missing
 echo "==========================="
 echo "[INFO] Installation by apt is done"
 echo "==========================="
+
+# add user and group for qbittorrent and the files which is downloaded via it
+sudo groupadd qbtuser -g 9999
+sudo useradd qbtuser -g qbtuser -s /usr/sbin/nologin
 
 # custom installation (include oh-my-zsh)
 for CUSTOM_APP in `find "$DOTFILES_DIR/custom_install" -type f`; do
     APP_NAME=$(basename "$CUSTOM_APP")
     APP_NAME=${APP_NAME%.*}
     echo "[INFO] Install $APP_NAME"
-    (/bin/sh "$CUSTOM_APP" &&
+    (/bin/bash "$CUSTOM_APP" &&
         echo "[INFO] $APP_NAME has been installed") ||
         echo "[INFO] $APP_NAME has been failed installing"
 done
@@ -39,3 +43,5 @@ echo "==========================="
 echo "==========================="
 echo "[INFO] Done!"
 echo "==========================="
+
+unset DOTFILES_DIR
