@@ -3,5 +3,5 @@ docker/pure-ftp/private/*
 docker/pure-ftp/passwd/*
 docker/qbittorrent/config/Downloads/*
 docker/qbittorrent/config/data/*
-docker/qbittorrent/config/qbittorrent/qbittorrent-data.config
+docker/qbittorrent/config/qBittorrent/qBittorrent-data.conf
 docker/.env
