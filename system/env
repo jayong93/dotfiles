@@ -1,1 +1,6 @@
 export TERM=xterm-256color
+export PATH="$PATH:$HOME/.bin:${DOTFILES_DIR}/scripts"
+
+# add to path
+test -d ~/.linuxbrew && export PATH="$HOME/.linuxbrew/bin:$HOME/.linuxbrew/sbin:$PATH"
+test -d /home/linuxbrew/.linuxbrew && export PATH="/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:$PATH"

@@ -31,7 +31,7 @@ echo "[INFO] Custom installation is done"
 echo "==========================="
 
 # link runcom files
-ln -sfv "$DOTFILES_DIR/rc/.zprofile" ~
+echo "source ${DOTFILES_DIR}/rc/.zprofile" >> ~/.zshrc
 ln -sfv "$DOTFILES_DIR/rc/.vimrc" ~
 
 # do post-process
@@ -43,5 +43,3 @@ echo "==========================="
 echo "==========================="
 echo "[INFO] Done!"
 echo "==========================="
-
-unset DOTFILES_DIR
