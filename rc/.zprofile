@@ -19,3 +19,5 @@ done
 
 unset READLINK CURRENT_SCRIPT SCRIPT_PATH DOTFILE
 export DOTFILES_DIR
+
+export PATH="$HOME/.cargo/bin:$PATH"

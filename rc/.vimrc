@@ -10,6 +10,7 @@ Plug 'scrooloose/nerdcommenter'
 Plug '~/.fzf'
 Plug 'tpope/vim-fugitive'
 Plug 'terryma/vim-multiple-cursors'
+Plug 'rust-lang/rust.vim'
 call plug#end()
 
 syntax on
