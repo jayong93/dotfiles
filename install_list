@@ -6,3 +6,4 @@ zsh
 vim
 openssh-server
 byobu
+curl
