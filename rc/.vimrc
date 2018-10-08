@@ -50,3 +50,4 @@ let g:syntastic_check_on_wq=0
 let g:syntastic_python_checkers=['pylint']
 let g:syntastic_python_pylint_exec="pylint3"
 let g:syntastic_python_pylint_args="-E"
+let g:syntastic_rust_checkers=['rustc']
