@@ -11,6 +11,7 @@ Plug '~/.fzf'
 Plug 'tpope/vim-fugitive'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'rust-lang/rust.vim'
+" Plug 'Valloric/YouCompleteMe'
 call plug#end()
 
 syntax on
@@ -50,3 +51,8 @@ let g:syntastic_check_on_wq=0
 let g:syntastic_python_checkers=['pylint']
 let g:syntastic_python_pylint_exec="pylint3"
 let g:syntastic_python_pylint_args="-E"
+
+map / <Plug>(easymotion-sn)
+omap / <Plug>(easymotion-bd-tn)
+" make default word motion bidirectional
+map <Plug>(easymotion-prefix)w <Plug>(easymotion-bd-w)
