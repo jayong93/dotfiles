@@ -56,3 +56,4 @@ map / <Plug>(easymotion-sn)
 omap / <Plug>(easymotion-bd-tn)
 " make default word motion bidirectional
 map <Plug>(easymotion-prefix)w <Plug>(easymotion-bd-w)
+let g:syntastic_rust_checkers=['rustc']
