@@ -7,11 +7,13 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'easymotion/vim-easymotion'
 Plug 'tpope/vim-surround'
 Plug 'scrooloose/nerdcommenter'
-Plug '~/.fzf'
 Plug 'tpope/vim-fugitive'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'rust-lang/rust.vim'
-" Plug 'Valloric/YouCompleteMe'
+Plug 'Valloric/YouCompleteMe'
+Plug 'lotabout/skim', { 'dir': '~/.skim', 'do': './install' }
+Plug 'lotabout/skim.vim'
+Plug 'mileszs/ack.vim'
 call plug#end()
 
 syntax on
@@ -57,3 +59,6 @@ omap / <Plug>(easymotion-bd-tn)
 " make default word motion bidirectional
 map <Plug>(easymotion-prefix)w <Plug>(easymotion-bd-w)
 let g:syntastic_rust_checkers=['rustc']
+
+" use ag with Ack command
+let g:ackprg = 'ag --nogroup --nocolor --column'
