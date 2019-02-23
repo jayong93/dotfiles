@@ -20,4 +20,5 @@ done
 unset READLINK CURRENT_SCRIPT SCRIPT_PATH DOTFILE
 export DOTFILES_DIR
 
-export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="$HOME/.cargo/bin:$HOME/.skim/bin:$PATH"
+export SKIM_DEFAULT_COMMAND="fd -IH"
