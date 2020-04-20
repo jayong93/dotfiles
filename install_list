@@ -1,10 +1,6 @@
-sudo
-git
 coreutils
 software-properties-common
 zsh
 vim
-openssh-server
 byobu
 curl
-silversearcher-ag
