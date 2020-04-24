@@ -1,0 +1,5 @@
+[scripts.mem-usage]
+alias = 'mem-usage'
+command = 'ps -eo rsz,cmd | grep "^\s*[0-9]\+ $0" | grep -v grep'
+
+[default]
