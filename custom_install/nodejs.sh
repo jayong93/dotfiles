@@ -1,2 +1,2 @@
-sudo curl -sL install-node.now.sh/lts | bash
+curl -sL install-node.now.sh/lts | sudo bash
 
