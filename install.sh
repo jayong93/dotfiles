@@ -26,7 +26,8 @@ echo "==========================="
 
 # link runcom files
 echo "source ${DOTFILES_DIR}/rc/.zprofile" >> ~/.zshrc
-ln -sfv "${DOTFILES_DIR}/rc/.vimrc" ~
+mkdir -p ~/.config/nvim
+ln -sfv "${DOTFILES_DIR}/rc/.vimrc" ~/.config/nvim/init.vim
 ln -sfv "${DOTFILES_DIR}/rc/.pier.toml" ~
 
 # do post-process

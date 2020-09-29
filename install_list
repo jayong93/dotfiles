@@ -1,6 +1,7 @@
 coreutils
 software-properties-common
 zsh
-vim
+neovim
+python3-neovim
 byobu
 curl
