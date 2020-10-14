@@ -20,7 +20,6 @@ syntax on
 colorscheme dracula
 set autoindent
 set nu
-set rnu
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
@@ -41,19 +40,6 @@ set fileencodings=utf8,euc-kr
 
 " vim 상단에 버퍼들 표시
 let g:airline#extensions#tabline#enabled=1
-
-" syntastic 설정
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_always_populate_loc_list=1
-let g:syntastic_auto_loc_list=1
-let g:syntastic_check_on_open=1
-let g:syntastic_check_on_wq=0
-let g:syntastic_python_checkers=['pylint']
-let g:syntastic_python_pylint_exec="pylint3"
-let g:syntastic_python_pylint_args="-E"
-let g:syntastic_rust_checkers = ['cargo']
 
 map / <Plug>(easymotion-sn)
 omap / <Plug>(easymotion-bd-tn)
