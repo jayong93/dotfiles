@@ -1,5 +1,5 @@
 " vim-plug setting
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.local/share/nvim/plugged')
 Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'vim-airline/vim-airline'
 Plug 'jiangmiao/auto-pairs'
