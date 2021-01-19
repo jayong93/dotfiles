@@ -20,6 +20,6 @@ done
 unset READLINK CURRENT_SCRIPT SCRIPT_PATH DOTFILE
 export DOTFILES_DIR
 
-export PATH="$HOME/.bin:$HOME/.cargo/bin:$HOME/.skim/bin:$PATH"
+export PATH="$HOME/.local/bin:$HOME/.cargo/bin:$HOME/.skim/bin:$PATH"
 export SKIM_DEFAULT_COMMAND="fd -IH"
 export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
