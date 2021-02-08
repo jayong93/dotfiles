@@ -6,4 +6,8 @@ command = 'ps -eo rsz,cmd | grep "^\s*[0-9]\+ $0" | grep -v grep'
 alias = 'git-pushall'
 command = 'git remote | xargs -I{} git push --all {}'
 
+[scripts.kr-to-utf]
+alias = 'kr-to-utf'
+command = 'iconv -f EUC-KR -t UTF8 $1'
+
 [default]
