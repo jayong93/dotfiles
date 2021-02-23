@@ -10,4 +10,8 @@ command = 'git remote | xargs -I{} git push --all {}'
 alias = 'kr-to-utf'
 command = 'iconv -f EUC-KR -t UTF8 $1'
 
+[scripts.update-ubuntu]
+alias = 'update-ubuntu'
+command = 'sudo apt update && sudo apt upgrade -y'
+
 [default]
