@@ -12,6 +12,8 @@ Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-surround'
 "" Plugin for statusline/tabline
 Plug 'itchyny/lightline.vim'
+"" Commening plugin
+Plug 'tpope/vim-commentary'
 
 " End plugin definitions
 call plug#end()
