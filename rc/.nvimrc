@@ -20,6 +20,8 @@ Plug 'tpope/vim-surround'
 Plug 'itchyny/lightline.vim', Cond(!exists('g:vscode'))
 "" Commening plugin
 Plug 'tpope/vim-commentary', Cond(!exists('g:vscode'))
+"" Git plugin
+Plug 'tpope/vim-fugitive'
 
 " End plugin definitions
 call plug#end()
