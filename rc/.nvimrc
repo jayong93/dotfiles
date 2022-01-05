@@ -11,6 +11,8 @@ call plug#begin(stdpath('data') . '/plugged')
 Plug 'neoclide/coc.nvim', Cond(!exists('g:vscode'), {'branch': 'release'})
 "" Onehalf Theme
 Plug 'sonph/onehalf', Cond(!exists('g:vscode'), { 'rtp': 'vim' })
+"" Zenburn theme (low contrast)
+Plug 'jnurmine/Zenburn', Cond(!exists('g:vscode'))
 "" Fuzzy finder
 Plug 'junegunn/fzf', Cond(!exists('g:vscode'), { 'do': { -> fzf#install() } })
 Plug 'junegunn/fzf.vim', Cond(!exists('g:vscode'))
@@ -27,14 +29,15 @@ Plug 'tpope/vim-fugitive'
 call plug#end()
 
 if !exists('g:vscode')
+    set t_Co=256
 
     syntax on
 
     " Set nvim theme
-    colorscheme onehalfdark
+    colorscheme zenburn
     " Set statusline theme (via lightline)
     let g:lightline = {
-                \ 'colorscheme': 'one',
+                \ 'colorscheme': 'wombat',
                 \ }
 
     " Enable true colors if available
@@ -56,6 +59,8 @@ if !exists('g:vscode')
 
     " show linenumber
     set nu
+    " show relative linenumber
+    set rnu
 
     " mode information is not needed anymore because of lightline plugin
     set noshowmode
