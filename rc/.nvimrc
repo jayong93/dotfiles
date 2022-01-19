@@ -112,5 +112,11 @@ if !exists('g:vscode')
     
     " Close float with Ctrl-C
     nnoremap <silent><nowait><expr> <c-c> coc#float#has_float() ? coc#float#close_all() : "\<c-c>"
+
+    " Jump to definition
+    nmap <silent> <leader>d <plug>(coc-definition)
+
+    " Format code
+    nmap <leader>f <plug>(coc-format)
 " }}}
 endif
