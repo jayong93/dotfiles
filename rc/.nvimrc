@@ -67,4 +67,13 @@ if !exists('g:vscode')
     " mode information is not needed anymore because of lightline plugin
     set noshowmode
 
+    " make the current word uppercase in insert mode
+    inoremap <c-u> <esc>viwUea
+    " make the current word uppercase in normal mode
+    nnoremap <c-u> viwU
+
+    " open vimrc
+    nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+    " source vimrc
+    nnoremap <leader>sv :source $MYVIMRC<cr>
 endif
