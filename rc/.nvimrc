@@ -69,8 +69,6 @@ if !exists('g:vscode')
 
     " make the current word uppercase in insert mode
     inoremap <c-u> <esc>viwUea
-    " make the current word uppercase in normal mode
-    nnoremap <c-u> viwU
 
     " open vimrc
     nnoremap <leader>ev :vsplit $MYVIMRC<cr>
