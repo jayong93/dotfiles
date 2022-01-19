@@ -38,6 +38,9 @@ if !exists('g:vscode')
     " Syntax highlighting
     syntax on
 
+    " Mouse support. check ':h mouse'
+    set mouse=nv
+
     " Set nvim theme
     colorscheme zenburn
     " Set statusline theme (via lightline)
@@ -91,5 +94,23 @@ if !exists('g:vscode')
         autocmd!
         autocmd FileType vim setlocal foldmethod=marker
     augroup END
+" }}}
+
+" Coc.nvim Key Mappings {{{
+    " Show symbol info
+    nnoremap <silent> K :call <SID>show_documentation()<CR>
+    function! s:show_documentation()
+        if (index(['vim', 'help'], &filetype) >= 0)
+            execute 'h' expand('<cword>')
+        else
+            call CocAction('doHover')
+        endif
+    endfunction
+
+    " Do quick actions
+    nnoremap <silent> <c-a> :CocAction<CR>
+    
+    " Close float with Ctrl-C
+    nnoremap <silent><nowait><expr> <c-c> coc#float#has_float() ? coc#float#close_all() : "\<c-c>"
 " }}}
 endif
