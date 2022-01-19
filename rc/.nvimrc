@@ -24,6 +24,8 @@ Plug 'itchyny/lightline.vim', Cond(!exists('g:vscode'))
 Plug 'tpope/vim-commentary', Cond(!exists('g:vscode'))
 "" Git plugin
 Plug 'tpope/vim-fugitive'
+"" Bracket auto pairing
+Plug 'jiangmiao/auto-pairs', Cond(!exists('g:vscode'))
 
 " End plugin definitions
 call plug#end()
