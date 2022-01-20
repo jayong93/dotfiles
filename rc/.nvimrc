@@ -113,10 +113,38 @@ if !exists('g:vscode')
     " Close float with Ctrl-C
     nnoremap <silent><nowait><expr> <c-c> coc#float#has_float() ? coc#float#close_all() : "\<c-c>"
 
-    " Jump to definition
-    nmap <silent> <leader>d <plug>(coc-definition)
+    " Diagnostics navigation
+    nmap <silent> [g <plug>(coc-diagnostic-prev)
+    nmap <silent> ]g <plug>(coc-diagnostic-next)
+
+    " Code navigation
+    nmap <silent> gd <plug>(coc-definition)
+    nmap <silent> gy <plug>(coc-type-definition)
+    nmap <silent> gi <plug>(coc-implementation)
+    nmap <silent> gr <plug>(coc-references)
+
+    " Renaming
+    nmap <leader>rn <plug>(coc-rename)
 
     " Format code
-    nmap <leader>f <plug>(coc-format)
+    nmap <leader>f <plug>(coc-format-selected)
+    xmap <leader>f <plug>(coc-format-selected)
+
+    " Actions
+    xmap <leader>a <plug>(coc-codeaction-selected)
+    nmap <leader>a <plug>(coc-codeaction-selected)
+    nmap <leader>ac <plug>(coc-codeaction)
+    nmap <leader>qf <plug>(coc-fix-current)
+    nmap <leader>cl <plug>(coc-codelens-action)
+
+    " Make Ctrl-r trigger completion
+    inoremap <silent><expr> <c-r> coc#refresh()
+
+    " Make <tab> completion confirm, snippet expand {{{
+	inoremap <silent><expr> <TAB>
+	  \ pumvisible() ? coc#_select_confirm() :
+      \ "\<tab>"
+
+    " }}}
 " }}}
 endif
