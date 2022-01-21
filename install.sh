@@ -1,51 +1,61 @@
 #!/bin/bash
 
-if [ ! -z "${1}" ] && [ -f "${1}" ]; then
-    FTP_USER_DATA="${1}"
-else
-    echo "you should give a file which has ftp user name and passwd in each line of itself."
-    exit 1
-fi
-export DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# installation on Linux
+install_Linux() {
+    echo "Install fish for Linux" 1>&2
 
-# installation by apt (include zsh)
-echo "==========================="
-echo "[INFO] Start installation by apt"
-echo "==========================="
-sudo apt update
-xargs -r -a "${DOTFILES_DIR}/install_list" sudo apt install -y --fix-missing
-echo "==========================="
-echo "[INFO] Installation by apt is done"
-echo "==========================="
+    dist_info=$(lsb_release -a)
 
-# add user and group for qbittorrent and the files which is downloaded via it
-sudo groupadd qbtuser -g 9999
-sudo useradd qbtuser -g qbtuser -s /usr/sbin/nologin
+    # requirements for Homebrew
+    if echo "$dist_info" | grep -i -e 'ubuntu' -e 'debian' -e 'raspbian'; then
+        sudo apt-get install build-essential procps curl file git
+    elif echo "$dist_info" | grep -i -e 'fedora' -e 'centos' -e 'red hat'; then
+        sudo yum groupinstall 'Development Tools'
+        sudo yum install procps-ng curl file git
+        sudo yum install libxcrypt-compat # needed by Fedora 30 and up
+    else
+        echo "Couldn' get dist info." 1>&2
+        return 1
+    fi
 
-# custom installation (include oh-my-zsh)
-for CUSTOM_APP in `find "${DOTFILES_DIR}/custom_install" -type f`; do
-    APP_NAME=$(basename "${CUSTOM_APP}")
-    APP_NAME=${APP_NAME%.*}
-    echo "[INFO] Install $APP_NAME"
-    (/bin/bash "${CUSTOM_APP}" &&
-        echo "[INFO] ${APP_NAME} has been installed") ||
-        echo "[INFO] ${APP_NAME} has been failed installing"
-done
-echo "==========================="
-echo "[INFO] Custom installation is done"
-echo "==========================="
+    # install Homebrew
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-# link runcom files
-echo "source ${DOTFILES_DIR}/rc/.zprofile" >> ~/.zshrc
-ln -sfv "${DOTFILES_DIR}/rc/.vimrc" ~
-ln -sfv "${DOTFILES_DIR}/rc/.pier.toml" ~
+    test -d ~/.linuxbrew && eval "$(~/.linuxbrew/bin/brew shellenv)"
+    test -d /home/linuxbrew/.linuxbrew && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+    if ! which brew
+        echo "Couldn't find brew. It may not be installed." 1>&2
+        return 1
+    fi
 
-# do post-process
-POST_SCRIPT="${DOTFILES_DIR}/postprocess.sh"
-echo "==========================="
-echo "[INFO] Do Postprocess"
-echo "==========================="
-/bin/bash "${POST_SCRIPT}" "${FTP_USER_DATA}"
-echo "==========================="
-echo "[INFO] Done!"
-echo "==========================="
+    brew install fish && exec fish ./install_impl.fish
+}
+
+# installation on OS X
+install_Darwin() {
+    echo "Install fish for OS X" 1>&2
+
+    # install Homebrew
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+    test -e /opt/homebrew/bin/brew && eval $(/opt/homebrew/bin/brew shellenv)
+    test -e /usr/local/bin/brew && eval $(/usr/local/bin/brew shellenv)
+    if ! which brew
+        echo "Couldn't find brew. It may not be installed." 1>&2
+        return 1
+    fi
+
+    brew install fish && exec fish ./install_impl.fish
+}
+
+os_name=$(uname)
+case $os_name in
+    Linux | Darwin)
+        install_$os_name
+        ;;
+
+    *)
+        echo "Unknown OS name from 'uname'" 1>&2
+        return 1
+        ;;
+esac
