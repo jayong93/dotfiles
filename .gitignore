@@ -1,7 +1,2 @@
-docker/pure-ftp/logs/*
-docker/pure-ftp/private/*
-docker/pure-ftp/passwd/*
-docker/qbittorrent/config/Downloads/*
-docker/qbittorrent/config/data/*
-docker/qbittorrent/config/qBittorrent/qBittorrent-data.conf
-docker/.env
+# config.fish should be for local-only configurations. (e.g. config only for office works)
+fish-config/config.fish

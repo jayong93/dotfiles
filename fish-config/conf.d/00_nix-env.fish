@@ -1,0 +1,1 @@
+../nix-env/conf.d/nix-env.fish

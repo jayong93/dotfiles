@@ -1,0 +1,3 @@
+[submodule "fish-config/nix-env"]
+	path = fish-config/nix-env
+	url = https://github.com/lilyball/nix-env.fish.git
