@@ -33,8 +33,6 @@ Plug 'jiangmiao/auto-pairs', Cond(!exists('g:vscode'))
 call plug#end()
 
 if !exists('g:vscode')
-    set t_Co=256
-
     " Syntax highlighting
     syntax on
 
