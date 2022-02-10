@@ -39,7 +39,7 @@ if !exists('g:vscode')
     syntax on
 
     " Mouse support. check ':h mouse'
-    set mouse=nv
+    " set mouse=nv
 
     " Set nvim theme
     colorscheme zenburn
@@ -147,4 +147,16 @@ if !exists('g:vscode')
 
     " }}}
 " }}}
+
+    " open a terminal in a new window
+    command NewTerm new | term
+
+    " Navigate vim tabs
+    nnoremap <c-q>n :tabnext<cr>
+    nnoremap <c-q>p :tabprevious<cr>
+
+    " use 'rg' as a grep program
+    if executable('rg')
+        set grepprg=rg\ --color=never\ --vimgrep
+    endif
 endif
