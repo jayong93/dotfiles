@@ -125,7 +125,7 @@ if !exists('g:vscode')
     nmap <leader>rn <plug>(coc-rename)
 
     " Format code
-    nmap <leader>f <plug>(coc-format-selected)
+    nmap <leader>f <plug>(coc-format)
     xmap <leader>f <plug>(coc-format-selected)
 
     " Actions
