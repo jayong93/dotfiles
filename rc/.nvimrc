@@ -10,10 +10,8 @@ call plug#begin(stdpath('data') . '/plugged')
 " Plugins {{{
 "" CoC plugin
 Plug 'neoclide/coc.nvim', Cond(!exists('g:vscode'), {'branch': 'release'})
-"" Onehalf Theme
-Plug 'sonph/onehalf', Cond(!exists('g:vscode'), { 'rtp': 'vim' })
-"" Zenburn theme (low contrast)
-Plug 'jnurmine/Zenburn', Cond(!exists('g:vscode'))
+"" TokyoNight theme
+Plug 'jacoborus/tender.vim'
 "" Fuzzy finder
 Plug 'junegunn/fzf', Cond(!exists('g:vscode'), { 'do': { -> fzf#install() } })
 Plug 'junegunn/fzf.vim', Cond(!exists('g:vscode'))
@@ -42,10 +40,10 @@ if !exists('g:vscode')
     " set mouse=nv
 
     " Set nvim theme
-    colorscheme zenburn
+    colorscheme tender
     " Set statusline theme (via lightline)
     let g:lightline = {
-                \ 'colorscheme': 'wombat',
+                \ 'colorscheme': 'tender',
                 \ }
 
     " Close all fold when start editing
