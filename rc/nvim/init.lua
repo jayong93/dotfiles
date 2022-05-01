@@ -135,4 +135,7 @@ if not is_in_vscode then
   if vim.fn.executable('rg') then
     vim.o.grepprg = 'rg --color=never --vimgrep'
   end
+
+  -- Change Coc inlay hint color
+  vim.api.nvim_set_hl(0, 'CocHintSign', {fg = '#aaaaaa'})
 end
