@@ -52,8 +52,19 @@ if not is_in_vscode then
     colorscheme tender
   ]]
 
+  vim.g.CocCurrentFunction = function()
+    return vim.b.coc_current_function or ''
+  end
   -- Set statusline theme (via lightline)
-  vim.g.lightline = {colorscheme = 'tender'}
+  vim.g.lightline =
+    {
+      colorscheme = 'tender',
+      active =
+        {left = {{'mode', 'paste'},
+                 {'cocstatus', 'currentfunction', 'readonly', 'filename', 'modified'}}},
+      component_function =
+        {cocstatus = 'coc#status', currentfunction='CocCurrentFunction'}
+    }
   vim.o.foldlevelstart = 0
   -- Color Setting {{{
   -- Enable true colors if available
@@ -120,9 +131,16 @@ if not is_in_vscode then
   -- Make Ctrl-r trigger completion
   noremap_silent('i', '<c-r>', 'coc#refresh()', {expr = true})
   noremap_silent('i', '<TAB>', [[pumvisible() ? coc#_select_confirm() : "\<tab>"]], {expr=true})
-  --
+
+  -- Scroll floating window
+  noremap_silent('n', '<c-u>', [[coc#float#has_scroll() ? coc#float#scroll(0) : "\<c-u>"]], {expr=true})
+  noremap_silent('n', '<c-d>', [[coc#float#has_scroll() ? coc#float#scroll(1) : "\<c-d>"]], {expr=true})
+
+  -- Close floating window with ESC
+  noremap_silent('n', '<esc>', [[coc#float#has_float() ? coc#float#close_all() : "\<esc>"]], {expr=true})
+
   -- open a terminal in a new window
-  vim.api.nvim_create_user_command('NewTerm', 'new | term', {nargs = 1})
+  vim.api.nvim_create_user_command('NewTerm', 'new | term', {nargs = 0})
 
   -- Navigate vim tabs
   noremap('n', '<c-q>n', ':tabnext<cr>')
