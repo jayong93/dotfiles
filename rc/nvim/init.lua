@@ -61,7 +61,7 @@ if not is_in_vscode then
       colorscheme = 'tender',
       active =
         {left = {{'mode', 'paste'},
-                 {'cocstatus', 'currentfunction', 'readonly', 'filename', 'modified'}}},
+                 {'filename', 'cocstatus', 'currentfunction', 'readonly', 'modified'}}},
       component_function =
         {cocstatus = 'coc#status', currentfunction='CocCurrentFunction'}
     }
