@@ -133,11 +133,19 @@ if not is_in_vscode then
   noremap_silent('i', '<TAB>', [[pumvisible() ? coc#_select_confirm() : "\<tab>"]], {expr=true})
 
   -- Scroll floating window
-  noremap_silent('n', '<c-u>', [[coc#float#has_scroll() ? coc#float#scroll(0) : "\<c-u>"]], {expr=true})
-  noremap_silent('n', '<c-d>', [[coc#float#has_scroll() ? coc#float#scroll(1) : "\<c-d>"]], {expr=true})
+  noremap_silent({'i','n'}, '<c-u>', [[coc#float#has_scroll() ? coc#float#scroll(0) : "\<c-u>"]], {expr=true})
+  noremap_silent({'i','n'}, '<c-d>', [[coc#float#has_scroll() ? coc#float#scroll(1) : "\<c-d>"]], {expr=true})
 
   -- Close floating window with ESC
   noremap_silent('n', '<esc>', [[coc#float#has_float() ? coc#float#close_all() : "\<esc>"]], {expr=true})
+
+  vim.o.updatetime = 300
+
+  if not string.find(vim.o.shortmess, 'c') then
+      vim.o.shortmess = vim.o.shortmess .. 'c'
+  end
+
+  vim.api.nvim_create_autocmd("CursorHold", {pattern="*", command="silent call CocActionAsync('highlight')"})
 
   -- open a terminal in a new window
   vim.api.nvim_create_user_command('NewTerm', 'new | term', {nargs = 0})
