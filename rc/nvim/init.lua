@@ -21,6 +21,8 @@ Plug('tpope/vim-commentary', Plug.cond(not is_in_vscode))
 Plug 'tpope/vim-fugitive'
 ---- Bracket auto pairing
 Plug('jiangmiao/auto-pairs', Plug.cond(not is_in_vscode))
+---- EditorConfig plugin
+Plug 'editorconfig/editorconfig-vim'
 -- }}}
 Plug.ends()
 
@@ -164,4 +166,24 @@ if not is_in_vscode then
 
   -- Change Coc inlay hint color
   vim.api.nvim_set_hl(0, 'CocHintSign', {fg = '#aaaaaa'})
+
+  -- Add a command to delete buffers
+  vim.cmd [[
+  function! s:list_buffers()
+    redir => list
+    silent ls
+    redir END
+    return split(list, "\n")
+  endfunction
+
+  function! s:delete_buffers(lines)
+    execute 'bwipeout' join(map(a:lines, {_, line -> split(line)[0]}))
+  endfunction
+
+  command! BD call fzf#run(fzf#wrap({
+    \ 'source': s:list_buffers(),
+    \ 'sink*': { lines -> s:delete_buffers(lines) },
+    \ 'options': '--multi --reverse --bind ctrl-a:select-all+accept'
+  \ }))
+  ]]
 end
