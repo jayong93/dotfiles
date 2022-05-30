@@ -23,6 +23,9 @@ Plug 'tpope/vim-fugitive'
 Plug('jiangmiao/auto-pairs', Plug.cond(not is_in_vscode))
 ---- EditorConfig plugin
 Plug 'editorconfig/editorconfig-vim'
+---- Wiki plugin
+Plug 'lervag/wiki.vim'
+Plug 'lervag/wiki-ft.vim'
 -- }}}
 Plug.ends()
 
@@ -129,6 +132,8 @@ if not is_in_vscode then
   map('n', '<leader>ac', '<plug>(coc-codeaction)')
   map('n', '<leader>qf', '<plug>(coc-fix-current)')
   map('n', '<leader>cl', '<plug>(coc-codelens-action)')
+  map('n', '<leader>ic', ':call CocAction("showIncomingCalls")<CR>')
+  map('n', '<leader>oc', ':call CocAction("showOutgoingCalls")<CR>')
 
   -- Make Ctrl-r trigger completion
   noremap_silent('i', '<c-r>', 'coc#refresh()', {expr = true})
@@ -154,7 +159,9 @@ if not is_in_vscode then
 
   -- Navigate vim tabs
   noremap('n', '<c-q>n', ':tabnext<cr>')
+  noremap('n', '<c-q><c-n>', ':tabnext<cr>')
   noremap('n', '<c-q>p', ':tabprevious<cr>')
+  noremap('n', '<c-q><c-p>', ':tabprevious<cr>')
 
   noremap('n', '<leader>ev', ':vsplit $MYVIMRC<cr>')
   noremap('n', '<leader>sv', ':source $MYVIMRC<cr>')
@@ -186,4 +193,10 @@ if not is_in_vscode then
     \ 'options': '--multi --reverse --bind ctrl-a:select-all+accept'
   \ }))
   ]]
+
+  -- Add Wiki search hotkey
+  noremap('n', '<leader>ws', ':WikiFzfPages<cr>', {nowait=true})
+
+  -- Set root wiki directory
+  vim.g.wiki_root = '~/wiki'
 end
