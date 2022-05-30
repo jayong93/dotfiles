@@ -134,6 +134,7 @@ if not is_in_vscode then
   map('n', '<leader>cl', '<plug>(coc-codelens-action)')
   map('n', '<leader>ic', ':call CocAction("showIncomingCalls")<CR>')
   map('n', '<leader>oc', ':call CocAction("showOutgoingCalls")<CR>')
+  map('n', '<leader>ol', ':call CocAction("showOutline")<CR>')
 
   -- Make Ctrl-r trigger completion
   noremap_silent('i', '<c-r>', 'coc#refresh()', {expr = true})
