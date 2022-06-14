@@ -175,6 +175,9 @@ if not is_in_vscode then
   -- Change Coc inlay hint color
   vim.api.nvim_set_hl(0, 'CocHintSign', {fg = '#aaaaaa'})
 
+  -- Change symbol color the cursor is holding
+  vim.api.nvim_set_hl(0, 'CursorColumn', {bg = '#555555'})
+
   -- Add a command to delete buffers
   vim.cmd [[
   function! s:list_buffers()
