@@ -159,10 +159,12 @@ if not is_in_vscode then
   vim.api.nvim_create_user_command('NewTerm', 'new | term', {nargs = 0})
 
   -- Navigate vim tabs
-  noremap('n', '<c-q>n', ':tabnext<cr>')
-  noremap('n', '<c-q><c-n>', ':tabnext<cr>')
-  noremap('n', '<c-q>p', ':tabprevious<cr>')
-  noremap('n', '<c-q><c-p>', ':tabprevious<cr>')
+  noremap('n', '<c-q>l', ':tabnext<cr>')
+  noremap('n', '<c-q><c-l>', ':tabnext<cr>')
+  noremap('n', '<c-q>h', ':tabprevious<cr>')
+  noremap('n', '<c-q><c-h>', ':tabprevious<cr>')
+  noremap('n', '<c-q>n', ':tabnew<cr>')
+  noremap('n', '<c-q><c-n>', ':tabnew<cr>')
 
   noremap('n', '<leader>ev', ':vsplit $MYVIMRC<cr>')
   noremap('n', '<leader>sv', ':source $MYVIMRC<cr>')
@@ -203,4 +205,14 @@ if not is_in_vscode then
 
   -- Set root wiki directory
   vim.g.wiki_root = '~/wiki'
+
+  -- Fzf related command mappings
+  noremap('n', '<leader>]w', ':Windows<cr>')
+  noremap('n', '<leader>]r', ':Rg ')
+  noremap('n', '<leader>]c', ':Commands<cr>')
+  noremap('n', '<leader>]e', '<c-w>v:Explore<cr>') -- this one is not related to fzf, but it works similarly
+  noremap('n', '<leader>]f', ':Files<cr>')
+  noremap('n', '<leader>]b', ':Buffers<cr>')
+  noremap('n', '<leader>]ll', ':Lines<cr>')
+  noremap('n', '<leader>]lb', ':BLines<cr>')
 end
