@@ -26,6 +26,7 @@ Plug 'editorconfig/editorconfig-vim'
 ---- Wiki plugin
 Plug 'lervag/wiki.vim'
 Plug 'lervag/wiki-ft.vim'
+Plug 'lervag/lists.vim'
 -- }}}
 Plug.ends()
 
@@ -56,6 +57,9 @@ if not is_in_vscode then
     syntax on
     colorscheme tender
   ]]
+
+  -- font setting for gui
+  vim.o.guifont = 'Fira Code:h18'
 
   vim.g.CocCurrentFunction = function()
     return vim.b.coc_current_function or ''
@@ -180,6 +184,9 @@ if not is_in_vscode then
   -- Change symbol color the cursor is holding
   vim.api.nvim_set_hl(0, 'CursorColumn', {bg = '#555555'})
 
+  -- Change line number color
+  vim.api.nvim_set_hl(0, 'LineNr', {fg = '#6e6801', ctermfg = 'DarkYellow'})
+
   -- Add a command to delete buffers
   vim.cmd [[
   function! s:list_buffers()
@@ -215,4 +222,7 @@ if not is_in_vscode then
   noremap('n', '<leader>]b', ':Buffers<cr>')
   noremap('n', '<leader>]ll', ':Lines<cr>')
   noremap('n', '<leader>]lb', ':BLines<cr>')
+
+  -- lists.vim setting
+  vim.g.lists_filetypes = {'wiki', 'markdown'}
 end
