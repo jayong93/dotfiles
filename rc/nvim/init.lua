@@ -27,6 +27,8 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'lervag/wiki.vim'
 Plug 'lervag/wiki-ft.vim'
 Plug 'lervag/lists.vim'
+---- DAP plugin
+Plug 'mfussenegger/nvim-dap'
 -- }}}
 Plug.ends()
 
@@ -225,4 +227,11 @@ if not is_in_vscode then
 
   -- lists.vim setting
   vim.g.lists_filetypes = {'wiki', 'markdown'}
+
+  -- DAP configs
+  require('dap.lldb_vscode')
+  noremap_silent('n', '<leader>db', ":lua require'dap'.toggle_breakpoint()<cr>")
+  noremap_silent('n', '<leader>dB', ":lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<cr>")
+  noremap_silent('n', '<leader>dl', ":lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<cr>")
+  noremap_silent('n', '<leader>dr', ":lua require'dap'.repl.open()<cr>")
 end
