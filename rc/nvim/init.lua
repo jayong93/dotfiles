@@ -62,6 +62,8 @@ if not is_in_vscode then
 
   -- font setting for gui
   vim.o.guifont = 'Fira Code:h18'
+  -- Enable mouse support
+  vim.o.mouse = 'a'
 
   vim.g.CocCurrentFunction = function()
     return vim.b.coc_current_function or ''
@@ -118,6 +120,9 @@ if not is_in_vscode then
   -- Diagnostics navigation
   map_silent('n', '[g', '<plug>(coc-diagnostic-prev)')
   map_silent('n', ']g', '<plug>(coc-diagnostic-next)')
+
+  -- Copy to clipboard
+  noremap({'n','v'}, 'Y', '"*y')
 
   -- Code navigation
   map_silent('n', 'gd', '<plug>(coc-definition)')
