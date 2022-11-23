@@ -1,11 +1,21 @@
-local Plug = require 'plug'
+local Plug = require 'jy-config/plug'
 
 local is_in_vscode = vim.g.vscode ~= nil
 
 Plug.begin(vim.fn['stdpath']('data') .. '/plugged')
 -- Plugins {{{
----- CoC plugin
-Plug('neoclide/coc.nvim', Plug.cond(not is_in_vscode, {branch = 'release'}))
+---- Utility functions for lua
+Plug 'nvim-lua/plenary.nvim'
+---- LSP related plugins
+Plug 'williamboman/mason.nvim'
+Plug 'williamboman/mason-lspconfig.nvim'
+Plug 'neovim/nvim-lspconfig'
+Plug 'jose-elias-alvarez/null-ls.nvim'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/nvim-cmp'
 ---- Tender theme
 Plug 'jacoborus/tender.vim'
 ---- Fuzzy finder
@@ -23,14 +33,19 @@ Plug 'tpope/vim-fugitive'
 Plug('jiangmiao/auto-pairs', Plug.cond(not is_in_vscode))
 ---- EditorConfig plugin
 Plug 'editorconfig/editorconfig-vim'
----- Wiki plugin
-Plug 'lervag/wiki.vim'
-Plug 'lervag/wiki-ft.vim'
-Plug 'lervag/lists.vim'
 ---- DAP plugin
 Plug 'mfussenegger/nvim-dap'
 -- }}}
 Plug.ends()
+
+-- Plugin setups{{
+require("mason").setup()
+require("mason-lspconfig").setup()
+-- Setup LSP server using lspconfig AFTER HERE
+require("lspconfig").erlangls.setup{}
+-- Setup LSP end
+require("jy-config/nvim_cmp").setup()
+-- }}
 
 local function noremap(mode, key, cmd, opt)
   opt = opt or vim.empty_dict()
@@ -111,60 +126,15 @@ if not is_in_vscode then
   vim.o.showmode = false
 
   noremap('i', '<c-u>', '<esc>viwUea')
-  noremap_silent('n', 'K', [[:lua require('coc_util').show_document()<CR>]])
-
-  noremap_silent('n', '<c-a>', ':CocAction<CR>')
-  -- Close float with Ctrl-C
-  noremap_silent('n', '<c-c>', [[coc#float#has_float() ? coc#float#close_all() : "\<c-c>"]], {nowait=true, expr=true})
-
-  -- Diagnostics navigation
-  map_silent('n', '[g', '<plug>(coc-diagnostic-prev)')
-  map_silent('n', ']g', '<plug>(coc-diagnostic-next)')
 
   -- Copy to clipboard
   noremap({'n','v'}, 'Y', '"*y')
-
-  -- Code navigation
-  map_silent('n', 'gd', '<plug>(coc-definition)')
-  map_silent('n', 'gy', '<plug>(coc-type-definition)')
-  map_silent('n', 'gi', '<plug>(coc-implementation)')
-  map_silent('n', 'gr', '<plug>(coc-references)')
-
-  -- Renaming
-  map('n', '<leader>rn', '<plug>(coc-rename)')
-
-  -- Format code
-  map('n', '<leader>f', '<plug>(coc-format)')
-  map('x', '<leader>f', '<plug>(coc-format-selected)')
-
-  -- Actions
-  map('x', '<leader>a', '<plug>(coc-codeaction-selected)')
-  map('n', '<leader>a', '<plug>(coc-codeaction-selected)')
-  map('n', '<leader>ac', '<plug>(coc-codeaction)')
-  map('n', '<leader>qf', '<plug>(coc-fix-current)')
-  map('n', '<leader>cl', '<plug>(coc-codelens-action)')
-  map('n', '<leader>ic', ':call CocAction("showIncomingCalls")<CR>')
-  map('n', '<leader>oc', ':call CocAction("showOutgoingCalls")<CR>')
-  map('n', '<leader>ol', ':call CocAction("showOutline")<CR>')
-
-  -- Make Ctrl-r trigger completion
-  noremap_silent('i', '<c-r>', 'coc#refresh()', {expr = true})
-  noremap_silent('i', '<TAB>', [[pumvisible() ? coc#_select_confirm() : "\<tab>"]], {expr=true})
-
-  -- Scroll floating window
-  noremap_silent({'i','n'}, '<c-u>', [[coc#float#has_scroll() ? coc#float#scroll(0) : "\<c-u>"]], {expr=true})
-  noremap_silent({'i','n'}, '<c-d>', [[coc#float#has_scroll() ? coc#float#scroll(1) : "\<c-d>"]], {expr=true})
-
-  -- Close floating window with ESC
-  noremap_silent('n', '<esc>', [[coc#float#has_float() ? coc#float#close_all() : "\<esc>"]], {expr=true})
 
   vim.o.updatetime = 300
 
   if not string.find(vim.o.shortmess, 'c') then
       vim.o.shortmess = vim.o.shortmess .. 'c'
   end
-
-  vim.api.nvim_create_autocmd("CursorHold", {pattern="*", command="silent call CocActionAsync('highlight')"})
 
   -- open a terminal in a new window
   vim.api.nvim_create_user_command('NewTerm', 'new | term', {nargs = 0})
@@ -185,15 +155,6 @@ if not is_in_vscode then
     vim.o.grepprg = 'rg --color=never --vimgrep'
   end
 
-  -- Change Coc inlay hint color
-  vim.api.nvim_set_hl(0, 'CocHintSign', {fg = '#aaaaaa'})
-
-  -- Change symbol color the cursor is holding
-  vim.api.nvim_set_hl(0, 'CursorColumn', {bg = '#555555'})
-
-  -- Change line number color
-  vim.api.nvim_set_hl(0, 'LineNr', {fg = '#6e6801', ctermfg = 'DarkYellow'})
-
   -- Add a command to delete buffers
   vim.cmd [[
   function! s:list_buffers()
@@ -213,12 +174,6 @@ if not is_in_vscode then
     \ 'options': '--multi --reverse --bind ctrl-a:select-all+accept'
   \ }))
   ]]
-
-  -- Add Wiki search hotkey
-  noremap('n', '<leader>ws', ':WikiFzfPages<cr>', {nowait=true})
-
-  -- Set root wiki directory
-  vim.g.wiki_root = '~/wiki'
 
   -- Fzf related command mappings
   noremap('n', '<leader>]w', ':Windows<cr>')
