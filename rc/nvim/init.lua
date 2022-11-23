@@ -1,5 +1,6 @@
 ---@diagnostic disable: undefined-global
-require 'jy-config/plug'
+package.loaded['jy-config/plug']=nil
+require('jy-config/plug').setup()
 
 local function noremap(mode, key, cmd, opt)
   opt = opt or vim.empty_dict()
@@ -106,6 +107,8 @@ noremap('n', '<c-q><c-n>', ':tabnew<cr>')
 
 noremap('n', '<leader>ev', ':vsplit $MYVIMRC<cr>')
 noremap('n', '<leader>sv', ':source $MYVIMRC<cr>')
+
+noremap('n', '<leader>E', ':Ntree<cr>')
 
 -- use 'rg' as a grep program
 if vim.fn.executable('rg') then
