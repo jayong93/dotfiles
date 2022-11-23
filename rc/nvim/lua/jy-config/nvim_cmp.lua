@@ -63,6 +63,7 @@ return {
 
         -- Set up lspconfig.
         local capabilities = require('cmp_nvim_lsp').default_capabilities()
+        capabilities = vim.tbl_extend('keep', capabilities, require('lsp-status').capabilities)
         local lsp_setup = function (server_name)
             require('lspconfig')[server_name].setup {
               on_attach = require('jy-config/lsp').on_attach,

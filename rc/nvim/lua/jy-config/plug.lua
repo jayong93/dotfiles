@@ -1,73 +1,72 @@
-local configs = {
-  lazy = {},
-  start = {}
-}
-
-local Plug = {
-  begin = vim.fn['plug#begin'],
-
-  -- "end" is a keyword, need something else
-  ends = function()
-    vim.fn['plug#end']()
-
-    for i, config in pairs(configs.start) do
-      config()
-    end
-  end,
-
-  cond = function(condition, opts)
-    opts = opts or vim.empty_dict()
-    if condition then
-      return opts
-    else
-      return {on = {}, ['for'] = {}}
-    end
+local ensure_packer = function()
+  local fn = vim.fn
+  local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+  if fn.empty(fn.glob(install_path)) > 0 then
+    fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+    vim.cmd [[packadd packer.nvim]]
+    return true
   end
-}
-
--- Not a fan of global functions, but it'll work better 
--- for the people that will copy/paste this
-_G.VimPlugApplyConfig = function(plugin_name)
-  local fn = configs.lazy[plugin_name]
-  if type(fn) == 'function' then fn() end
+  return false
 end
 
-local plug_name = function(repo)
-  return repo:match("^[%w-]+/([%w-_.]+)$")
-end
+local packer_bootstrap = ensure_packer()
 
--- "Meta-functions"
-local meta = {
+return require('packer').startup(function(use)
+  use 'wbthomason/packer.nvim'
+  -- My plugins here
 
-  -- Function call "operation"
-  __call = function(self, repo, opts)
-    opts = opts or vim.empty_dict()
+  ---- Utility functions for lua
+  use 'nvim-lua/plenary.nvim'
+  ---- LSP related plugins
+  use 'neovim/nvim-lspconfig'
+  use {'williamboman/mason.nvim',
+    config=function() require("mason").setup() end}
+  use {'williamboman/mason-lspconfig.nvim',
+    config=function() require("mason-lspconfig").setup() end}
+  use {'nvim-lua/lsp-status.nvim',
+    config=function () require("lsp-status").register_progress() end}
+  use 'hrsh7th/cmp-nvim-lsp'
+  use 'hrsh7th/cmp-buffer'
+  use 'hrsh7th/cmp-path'
+  use 'hrsh7th/cmp-cmdline'
+  use {'hrsh7th/nvim-cmp',
+    config=function() require("jy-config.nvim_cmp").setup({}) end}
+  use {'glepnir/lspsaga.nvim', branch='main',
+    config=function() require("jy-config.saga").setup() end}
+  ---- Snipets
+  use 'hrsh7th/cmp-vsnip'
+  use 'hrsh7th/vim-vsnip'
+  use 'rafamadriz/friendly-snippets'
+  ---- Tender theme
+  use 'jacoborus/tender.vim'
+  ---- Fuzzy finder
+  use {'nvim-telescope/telescope.nvim', tag='0.1.0',
+    config=function() require("jy-config.telescope").setup() end}
+  ---- Surround
+  use 'tpope/vim-surround'
+  ---- statusline/tabline
+  use 'itchyny/lightline.vim'
+  ---- Commening plugin
+  use 'tpope/vim-commentary'
+  ---- Git plugin
+  use 'tpope/vim-fugitive'
+  ---- Bracket auto pairing
+  use 'jiangmiao/auto-pairs'
+  ---- EditorConfig plugin
+  use 'editorconfig/editorconfig-vim'
+  ---- DAP plugin
+  use 'mfussenegger/nvim-dap'
+  ---- Auto session manage
+  use {'rmagatti/auto-session',
+    config=function() require("auto-session").setup {
+      log_level="error",
+      auto_session_suppress_dirs={"~/", "/"}
+    } end}
 
-    -- we declare some aliases for `do` and `for`
-    opts['do'] = opts.run
-    opts.run = nil
-
-    opts['for'] = opts.ft
-    opts.ft = nil
-
-    vim.call('plug#', repo, opts)
-
-    -- Add basic support to colocate plugin config
-    if type(opts.config) == 'function' then
-      local plugin = opts.as or plug_name(repo)
-
-      if opts['for'] == nil and opts.on == nil then
-        configs.start[plugin] = opts.config
-      else
-        configs.lazy[plugin] = opts.config
-
-        local user_cmd = [[ autocmd! User %s ++once lua VimPlugApplyConfig('%s') ]]
-        vim.cmd(user_cmd:format(plugin, plugin))
-      end
-
-    end
+  -- Automatically set up your configuration after cloning packer.nvim
+  -- Put this at the end after all plugins
+  if packer_bootstrap then
+    require('packer').sync()
   end
-}
+end)
 
--- Meta-tables are awesome
-return setmetatable(Plug, meta)

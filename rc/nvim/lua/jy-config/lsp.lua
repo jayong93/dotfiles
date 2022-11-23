@@ -26,6 +26,7 @@ return {
             desc = "Clear All the References",
         })
       end
+      require("lsp-status").on_attach(client)
 
       -- Mappings.
       -- See `:help vim.lsp.*` for documentation on any of the below functions
