@@ -18,6 +18,10 @@ Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/nvim-cmp'
 Plug('glepnir/lspsaga.nvim', {branch='main'})
+---- Snipets
+Plug 'hrsh7th/cmp-vsnip'
+Plug 'hrsh7th/vim-vsnip'
+Plug 'rafamadriz/friendly-snippets'
 ---- Tender theme
 Plug 'jacoborus/tender.vim'
 ---- Fuzzy finder
@@ -37,6 +41,8 @@ Plug('jiangmiao/auto-pairs', Plug.cond(not is_in_vscode))
 Plug 'editorconfig/editorconfig-vim'
 ---- DAP plugin
 Plug 'mfussenegger/nvim-dap'
+---- Auto session manage
+Plug 'rmagatti/auto-session'
 -- }}}
 Plug.ends()
 
@@ -45,6 +51,10 @@ require("mason").setup()
 require("mason-lspconfig").setup()
 require("jy-config/nvim_cmp").setup({'erlangls'})
 require("jy-config/saga").setup()
+require("auto-session").setup {
+    log_level="error",
+    auto_session_suppress_dirs={"~/", "/"}
+}
 -- }}
 
 local function noremap(mode, key, cmd, opt)
@@ -139,10 +149,6 @@ if not is_in_vscode then
   end
 
   -- Symbol highlight
-  vim.api.nvim_create_autocmd("CursorHold", {pattern="*", command="lua vim.lsp.buf.document_highlight()"})
-  vim.api.nvim_create_autocmd("CursorHoldI", {pattern="*", command="lua vim.lsp.buf.document_highlight()"})
-  vim.api.nvim_create_autocmd("CursorMoved", {pattern="*", command="lua vim.lsp.buf.clear_references()"})
-  vim.api.nvim_create_autocmd("CursorMovedI", {pattern="*", command="lua vim.lsp.buf.clear_references()"})
   vim.api.nvim_set_hl(0, 'LspReferenceText', {bg = '#555555'})
 
   -- open a terminal in a new window
@@ -188,7 +194,7 @@ if not is_in_vscode then
   noremap('n', '<leader>]w', ':Windows<cr>')
   noremap('n', '<leader>]r', ':Rg ')
   noremap('n', '<leader>]c', ':Commands<cr>')
-  noremap('n', '<leader>]e', '<c-w>v:Explore<cr>') -- this one is not related to fzf, but it works similarly
+  noremap('n', '<leader>]e', ':Explore<cr>') -- this one is not related to fzf, but it works similarly
   noremap('n', '<leader>]f', ':Files<cr>')
   noremap('n', '<leader>]b', ':Buffers<cr>')
   noremap('n', '<leader>]ll', ':Lines<cr>')
@@ -203,4 +209,15 @@ if not is_in_vscode then
   noremap_silent('n', '<leader>dB', ":lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<cr>")
   noremap_silent('n', '<leader>dl', ":lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<cr>")
   noremap_silent('n', '<leader>dr', ":lua require'dap'.repl.open()<cr>")
+
+  -- Snipet configs
+  vim.cmd [[
+    imap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
+    smap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
+    imap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
+    smap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
+  ]]
+
+  -- Copy paste
+  noremap_silent({'n','i'}, '<D-v>', [[<C-\><C-o>"+p]])
 end
