@@ -1,3 +1,4 @@
+---@diagnostic disable: undefined-global
 local Plug = require 'jy-config/plug'
 
 local is_in_vscode = vim.g.vscode ~= nil
@@ -16,6 +17,7 @@ Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/nvim-cmp'
+Plug('glepnir/lspsaga.nvim', {branch='main'})
 ---- Tender theme
 Plug 'jacoborus/tender.vim'
 ---- Fuzzy finder
@@ -41,10 +43,8 @@ Plug.ends()
 -- Plugin setups{{
 require("mason").setup()
 require("mason-lspconfig").setup()
--- Setup LSP server using lspconfig AFTER HERE
-require("lspconfig").erlangls.setup{}
--- Setup LSP end
-require("jy-config/nvim_cmp").setup()
+require("jy-config/nvim_cmp").setup({'erlangls'})
+require("jy-config/saga").setup()
 -- }}
 
 local function noremap(mode, key, cmd, opt)
@@ -135,6 +135,13 @@ if not is_in_vscode then
   if not string.find(vim.o.shortmess, 'c') then
       vim.o.shortmess = vim.o.shortmess .. 'c'
   end
+
+  -- Symbol highlight
+  vim.api.nvim_create_autocmd("CursorHold", {pattern="*", command="lua vim.lsp.buf.document_highlight()"})
+  vim.api.nvim_create_autocmd("CursorHoldI", {pattern="*", command="lua vim.lsp.buf.document_highlight()"})
+  vim.api.nvim_create_autocmd("CursorMoved", {pattern="*", command="lua vim.lsp.buf.clear_references()"})
+  vim.api.nvim_create_autocmd("CursorMovedI", {pattern="*", command="lua vim.lsp.buf.clear_references()"})
+  vim.api.nvim_set_hl(0, 'LspReferenceText', {bg = '#555555'})
 
   -- open a terminal in a new window
   vim.api.nvim_create_user_command('NewTerm', 'new | term', {nargs = 0})

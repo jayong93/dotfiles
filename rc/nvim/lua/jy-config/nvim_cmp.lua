@@ -1,17 +1,17 @@
 local cmp = require'cmp'
 
 return {
-    setup = function()
+    setup = function(servers)
         cmp.setup({
-            snippet = {
-              -- REQUIRED - you must specify a snippet engine
-              expand = function(args)
-                vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
-                -- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
-                -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
-                -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
-              end,
-            },
+            -- snippet = {
+            --   -- REQUIRED - you must specify a snippet engine
+            --   expand = function(args)
+            --     vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+            --     -- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+            --     -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
+            --     -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
+            --   end,
+            -- },
             window = {
               -- completion = cmp.config.window.bordered(),
               -- documentation = cmp.config.window.bordered(),
@@ -25,7 +25,7 @@ return {
             }),
             sources = cmp.config.sources({
               { name = 'nvim_lsp' },
-              { name = 'vsnip' }, -- For vsnip users.
+              -- { name = 'vsnip' }, -- For vsnip users.
               -- { name = 'luasnip' }, -- For luasnip users.
               -- { name = 'ultisnips' }, -- For ultisnips users.
               -- { name = 'snippy' }, -- For snippy users.
@@ -35,13 +35,13 @@ return {
         })
 
         -- Set configuration for specific filetype.
-        cmp.setup.filetype('gitcommit', {
-            sources = cmp.config.sources({
-              { name = 'cmp_git' }, -- You can specify the `cmp_git` source if you were installed it.
-            }, {
-              { name = 'buffer' },
-            })
-        })
+        -- cmp.setup.filetype('gitcommit', {
+        --     sources = cmp.config.sources({
+        --       { name = 'cmp_git' }, -- You can specify the `cmp_git` source if you were installed it.
+        --     }, {
+        --       { name = 'buffer' },
+        --     })
+        -- })
 
         -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
         cmp.setup.cmdline({ '/', '?' }, {
@@ -63,15 +63,17 @@ return {
 
         -- Set up lspconfig.
         local capabilities = require('cmp_nvim_lsp').default_capabilities()
+        local lsp_setup = function (server_name)
+            require('lspconfig')[server_name].setup {
+              on_attach = require('jy-config/lsp').on_attach,
+              capabilities = capabilities
+            }
+        end
         -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
         require('jy-config/lsp').setup()
-        require("mason-lspconfig").setup_handlers {
-            function (server_name)
-                require('lspconfig')[server_name].setup {
-                  on_attach = require('jy-config/lsp').on_attach,
-                  capabilities = capabilities
-                }
-            end
-        }
+        require("mason-lspconfig").setup_handlers { lsp_setup }
+        for _, server in ipairs(servers) do
+            lsp_setup(server)
+        end
     end
 }
