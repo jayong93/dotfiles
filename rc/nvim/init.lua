@@ -25,8 +25,7 @@ Plug 'rafamadriz/friendly-snippets'
 ---- Tender theme
 Plug 'jacoborus/tender.vim'
 ---- Fuzzy finder
-Plug('junegunn/fzf', Plug.cond(not is_in_vscode, {run = function() vim.fn['fzf#install']() end}))
-Plug('junegunn/fzf.vim', Plug.cond(not is_in_vscode))
+Plug('nvim-telescope/telescope.nvim', {tag='0.1.0'})
 ---- Surround
 Plug 'tpope/vim-surround'
 ---- Plugin for statusline/tabline
@@ -55,6 +54,7 @@ require("auto-session").setup {
     log_level="error",
     auto_session_suppress_dirs={"~/", "/"}
 }
+require("jy-config/telescope").setup()
 -- }}
 
 local function noremap(mode, key, cmd, opt)
@@ -169,39 +169,6 @@ if not is_in_vscode then
   if vim.fn.executable('rg') then
     vim.o.grepprg = 'rg --color=never --vimgrep'
   end
-
-  -- Add a command to delete buffers
-  vim.cmd [[
-  function! s:list_buffers()
-    redir => list
-    silent ls
-    redir END
-    return split(list, "\n")
-  endfunction
-
-  function! s:delete_buffers(lines)
-    execute 'bwipeout' join(map(a:lines, {_, line -> split(line)[0]}))
-  endfunction
-
-  command! BD call fzf#run(fzf#wrap({
-    \ 'source': s:list_buffers(),
-    \ 'sink*': { lines -> s:delete_buffers(lines) },
-    \ 'options': '--multi --reverse --bind ctrl-a:select-all+accept'
-  \ }))
-  ]]
-
-  -- Fzf related command mappings
-  noremap('n', '<leader>]w', ':Windows<cr>')
-  noremap('n', '<leader>]r', ':Rg ')
-  noremap('n', '<leader>]c', ':Commands<cr>')
-  noremap('n', '<leader>]e', ':Explore<cr>') -- this one is not related to fzf, but it works similarly
-  noremap('n', '<leader>]f', ':Files<cr>')
-  noremap('n', '<leader>]b', ':Buffers<cr>')
-  noremap('n', '<leader>]ll', ':Lines<cr>')
-  noremap('n', '<leader>]lb', ':BLines<cr>')
-
-  -- lists.vim setting
-  vim.g.lists_filetypes = {'wiki', 'markdown'}
 
   -- DAP configs
   require('dap.lldb_vscode')
