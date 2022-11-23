@@ -75,6 +75,8 @@ if not is_in_vscode then
     colorscheme tender
   ]]
 
+  vim.g.neovide_input_macos_alt_is_meta = true
+
   -- font setting for gui
   vim.o.guifont = 'Fira Code:h18'
   -- Enable mouse support

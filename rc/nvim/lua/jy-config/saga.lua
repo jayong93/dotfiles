@@ -27,7 +27,7 @@ return {
         keymap("n", "<leader>cd", "<cmd>Lspsaga show_line_diagnostics<CR>", { silent = true })
 
         -- Show cursor diagnostic
-        keymap("n", "<leader>cd", "<cmd>Lspsaga show_cursor_diagnostics<CR>", { silent = true })
+        -- keymap("n", "<leader>cd", "<cmd>Lspsaga show_cursor_diagnostics<CR>", { silent = true })
 
         -- Diagnsotic jump can use `<c-o>` to jump back
         keymap("n", "[e", "<cmd>Lspsaga diagnostic_jump_prev<CR>", { silent = true })
@@ -51,7 +51,7 @@ return {
         keymap("n", "<A-d>", "<cmd>Lspsaga open_floaterm<CR>", { silent = true })
         -- if you want pass somc cli command into terminal you can do like this
         -- open lazygit in lspsaga float terminal
-        keymap("n", "<A-d>", "<cmd>Lspsaga open_floaterm lazygit<CR>", { silent = true })
+        -- keymap("n", "<A-d>", "<cmd>Lspsaga open_floaterm lazygit<CR>", { silent = true })
         -- close floaterm
         keymap("t", "<A-d>", [[<C-\><C-n><cmd>Lspsaga close_floaterm<CR>]], { silent = true })
     end
