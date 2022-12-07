@@ -1,5 +1,5 @@
 ---@diagnostic disable: undefined-global
-package.loaded['jy-config/plug']=nil
+require('plenary.reload').reload_module('jy-config')
 require('jy-config/plug').setup()
 
 local function noremap(mode, key, cmd, opt)

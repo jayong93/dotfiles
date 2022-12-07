@@ -42,8 +42,8 @@ return {
       ---- Tender theme
       use 'jacoborus/tender.vim'
       ---- Fuzzy finder
-      use {'nvim-telescope/telescope.nvim', tag='0.1.0',
-          config=function() require("jy-config.telescope").setup() end}
+      use {'ibhagwan/fzf-lua',
+          config=function() require("jy-config.fuzzy-finder").setup() end}
       ---- Surround
       use 'tpope/vim-surround'
       ---- statusline/tabline
@@ -67,8 +67,10 @@ return {
       ---- Project managemant
       use {'ahmedkhalf/project.nvim',
           config = function()
-              require("project_nvim").setup{}
-              require('telescope').load_extension('projects')
+              require("project_nvim").setup{
+                  scope_chdir="tab",
+                  datapath=vim.fn.stdpath("data")
+              }
           end}
 
       -- Automatically set up your configuration after cloning packer.nvim

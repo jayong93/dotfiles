@@ -3,10 +3,8 @@ return {
     -- See `:help vim.diagnostic.*` for documentation on any of the below functions
     setup = function()
         local opts = { noremap=true, silent=true }
-        vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
-        vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
-        vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
         vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
+        vim.keymap.set({'n', 'v'}, '<leader>df', ':lua vim.lsp.buf.format{async=true}<CR>')
     end,
 
     -- Use an on_attach function to only map the following keys
