@@ -76,6 +76,8 @@ vim.o.softtabstop=4
 vim.o.nu = true
 -- show relative linenumber
 vim.o.rnu = true
+-- Line number color
+vim.api.nvim_set_hl(0, 'LineNr', {fg = '#987654'})
 -- }}}
 -- mode information is not needed anymore because of lightline plugin
 vim.o.showmode = false

@@ -11,6 +11,11 @@ end
 
 local packer_bootstrap = ensure_packer()
 
+local function reload(m)
+    package.loaded[m]=nil
+    return require(m)
+end
+
 return {
   setup = function()
     require('packer').startup(function(use)
@@ -32,9 +37,9 @@ return {
       use 'hrsh7th/cmp-path'
       use 'hrsh7th/cmp-cmdline'
       use {'hrsh7th/nvim-cmp',
-          config=function() require("jy-config.nvim_cmp").setup({}) end}
+          config=function() reload("jy-config.nvim_cmp").setup({}) end}
       use {'glepnir/lspsaga.nvim', branch='main',
-          config=function() require("jy-config.saga").setup() end}
+          config=function() reload("jy-config.saga").setup() end}
       ---- Snipets
       use 'hrsh7th/cmp-vsnip'
       use 'hrsh7th/vim-vsnip'
@@ -43,7 +48,7 @@ return {
       use 'jacoborus/tender.vim'
       ---- Fuzzy finder
       use {'ibhagwan/fzf-lua',
-          config=function() require("jy-config.fuzzy-finder").setup() end}
+          config=function() reload("jy-config.fuzzy-finder").setup() end}
       ---- Surround
       use 'tpope/vim-surround'
       ---- statusline/tabline
