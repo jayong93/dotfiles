@@ -133,4 +133,6 @@ smap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-T
 ]]
 
 -- Copy paste
-noremap_silent({'n','i'}, '<D-v>', [[<C-\><C-o>"+p]])
+noremap_silent({'i','c'}, '<D-v>', '<C-R>+')
+noremap_silent({'t'}, '<D-v>', [[<C-\><C-o>"+p]])
+noremap_silent({'n'}, '<D-v>', [["+p]])

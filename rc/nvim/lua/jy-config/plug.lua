@@ -11,7 +11,7 @@ end
 
 local packer_bootstrap = ensure_packer()
 
-local function reload(m)
+function reload(m)
     package.loaded[m]=nil
     return require(m)
 end
@@ -63,12 +63,6 @@ return {
       use 'editorconfig/editorconfig-vim'
       ---- DAP plugin
       use 'mfussenegger/nvim-dap'
-      ---- Auto session manage
-      use {'rmagatti/auto-session',
-          config=function() require("auto-session").setup {
-              log_level="error",
-              auto_session_suppress_dirs={"~/", "/"}
-          } end}
       ---- Project managemant
       use {'ahmedkhalf/project.nvim',
           config = function()
