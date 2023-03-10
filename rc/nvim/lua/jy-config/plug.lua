@@ -38,8 +38,16 @@ return {
       use 'hrsh7th/cmp-cmdline'
       use {'hrsh7th/nvim-cmp',
           config=function() reload("jy-config.nvim_cmp").setup({}) end}
+      use {'nvim-treesitter/nvim-treesitter', run=function()
+              local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
+              ts_update()
+          end}
       use {'glepnir/lspsaga.nvim', branch='main',
-          config=function() reload("jy-config.saga").setup() end}
+          requires='nvim-tree/nvim-web-devicons',
+          config=function()
+              require("lspsaga").setup({})
+              reload("jy-config.saga").setup()
+          end}
       ---- Snipets
       use 'hrsh7th/cmp-vsnip'
       use 'hrsh7th/vim-vsnip'
@@ -68,7 +76,8 @@ return {
           config = function()
               require("project_nvim").setup{
                   scope_chdir="tab",
-                  datapath=vim.fn.stdpath("data")
+                  datapath=vim.fn.stdpath("data"),
+                  detection_methods={"pattern", "lsp"}
               }
           end}
 
@@ -80,4 +89,3 @@ return {
     end)
   end
 }
-
