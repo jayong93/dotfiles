@@ -1,0 +1,76 @@
+-- every spec file under config.plugins will be loaded automatically by lazy.nvim
+--
+-- In your plugin files, you can:
+-- * add extra plugins
+-- * disable/enabled LazyVim plugins
+-- * override the configuration of LazyVim plugins
+return {
+  -- { "nvim-telescope/telescope.nvim", enabled = false },
+  -- {
+  --   "ibhagwan/fzf-lua",
+  --   cmd = {"FzfLua", "Cd", "Open"},
+  --   branch = "main",
+  --   keys = {
+  --     { "<leader>,", "<cmd>FzfLua buffers<cr>", desc = "Switch Buffer" },
+  --     { "<leader>/", "<cmd>FzfLua live_grep cwd=%:h<cr>", desc = "Find in Files (Grep)" },
+  --     { "<leader>:", "<cmd>FzfLua command_history<cr>", desc = "Command History" },
+  --     { "<leader><space>", "<cmd>FzfLua files cwd=%:h<cr>", desc = "Find Files (root dir)" },
+  --     -- find
+  --     { "<leader>fb", "<cmd>FzfLua buffers<cr>", desc = "Buffers" },
+  --     { "<leader>ff", "<cmd>FzfLua files cwd=%:h<cr>", desc = "Find Files (root dir)" },
+  --     { "<leader>fF", "<cmd>FzfLua files<cr>", desc = "Find Files (cwd)" },
+  --     { "<leader>fr", "<cmd>FzfLua oldfiles<cr>", desc = "Recent" },
+  --     -- git
+  --     { "<leader>gc", "<cmd>FzfLua git_commits<CR>", desc = "commits" },
+  --     { "<leader>gs", "<cmd>FzfLua git_status<CR>", desc = "status" },
+  --     -- search
+  --     { "<leader>sb", "<cmd>FzfLua lgrep_curbuf<cr>", desc = "Buffer" },
+  --     { "<leader>sc", "<cmd>FzfLua command_history<cr>", desc = "Command History" },
+  --     { "<leader>sC", "<cmd>FzfLua commands<cr>", desc = "Commands" },
+  --     { "<leader>sd", "<cmd>FzfLua diagnostics_document<cr>", desc = "Diagnostics" },
+  --     { "<leader>sg", "<cmd>FzfLua live_grep cwd=%:h<cr>", desc = "Grep (root dir)" },
+  --     { "<leader>sG", "<cmd>FzfLua live_grep<cr>", desc = "Grep (cwd)" },
+  --     { "<leader>sh", "<cmd>FzfLua help_tags<cr>", desc = "Help Pages" },
+  --     { "<leader>sH", "<cmd>FzfLua highlights<cr>", desc = "Search Highlight Groups" },
+  --     { "<leader>sk", "<cmd>FzfLua keymaps<cr>", desc = "Key Maps" },
+  --     { "<leader>sM", "<cmd>FzfLua man_pages<cr>", desc = "Man Pages" },
+  --     { "<leader>sm", "<cmd>FzfLua marks<cr>", desc = "Jump to Mark" },
+  --     { "<leader>ss", "<cmd>FzfLua lsp_document_symbols<cr>", desc = "Document Symbols" },
+  --   },
+  --   opts = function (_, opts)
+  --     opts.fzf_bin = 'sk'
+  --     vim.api.nvim_create_user_command("Cd", function (t)
+  --       local args = t.args or "."
+  --       require("fzf-lua").fzf_exec('fd -t d . ' .. args, {
+  --         actions = {
+  --           ['default'] = function (selected)
+  --             vim.cmd('cd ' .. selected[1])
+  --           end
+  --         }
+  --       })
+  --     end, {nargs="*"})
+  --     vim.api.nvim_create_user_command("Open", function (t)
+  --       local args = t.args or "."
+  --       require("fzf-lua").fzf_exec('fd -t d . ' .. args, {
+  --         actions = {
+  --           ['default'] = function (selected)
+  --             vim.cmd('cd ' .. selected[1])
+  --             vim.cmd('FzfLua files cwd=' .. selected[1])
+  --           end
+  --         }
+  --       })
+  --     end, {nargs="*"})
+  --     return opts
+  --   end,
+  -- },
+  -- {
+  --   "neovim/nvim-lspconfig",
+  --   init = function()
+  --     local keys = require("lazyvim.plugins.lsp.keymaps").get()
+  --     keys[#keys + 1] = { "gd", "<cmd>FzfLua lsp_definitions<cr>", desc = "Goto Definitions" }
+  --     keys[#keys + 1] = { "gI", "<cmd>FzfLua lsp_implementations<cr>", desc = "Goto Implementations" }
+  --     keys[#keys + 1] = { "gr", "<cmd>FzfLua lsp_references<cr>", desc = "References" }
+  --     keys[#keys + 1] = { "gt", "<cmd>FzfLua lsp_typedefs<cr>", desc = "Goto Type Definitions" }
+  --   end,
+  -- },
+}
