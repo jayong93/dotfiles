@@ -4,3 +4,4 @@
 
 vim.g.mapleader = [[\]]
 vim.o.wrap = true
+vim.g.autoformat = false
