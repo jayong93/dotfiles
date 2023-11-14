@@ -5,6 +5,7 @@ local config = {}
 -- font setting
 config.font = wezterm.font('FiraCode Nerd Font Mono', {weight="Medium"})
 config.font_size = 16
+config.freetype_load_target = "Light"
 
 -- key setting
 config.keys = {
