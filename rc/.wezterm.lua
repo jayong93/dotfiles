@@ -3,8 +3,10 @@ local wezterm = require 'wezterm'
 local config = {}
 
 -- font setting
-config.font = wezterm.font('FiraCode Nerd Font Mono', {weight="Medium"})
-config.font_size = 18
+config.font = wezterm.font_with_fallback{{family='MonaspiceNe Nerd Font Mono', weight="Medium"},
+  'Noto Sans CJK KR'
+}
+config.font_size = 16
 config.freetype_load_target = "Light"
 
 -- key setting
@@ -38,6 +40,7 @@ config.key_tables = {
     },
     {
       key = '"',
+      mods = 'SHIFT',
       action = wezterm.action.SplitVertical {domain="CurrentPaneDomain"},
     },
     {
