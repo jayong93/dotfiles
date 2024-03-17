@@ -4,9 +4,11 @@ local config = {}
 
 -- font setting
 config.font = wezterm.font_with_fallback{{family='MonaspiceNe Nerd Font Mono', weight="Medium"},
+  'D2CodingLigature Nerd Font Mono',
   'Noto Sans CJK KR'
 }
-config.font_size = 16
+config.dpi = 144
+config.font_size = 12
 config.freetype_load_target = "Light"
 
 -- key setting
