@@ -7,7 +7,6 @@ config.font = wezterm.font_with_fallback{{family='MonaspiceNe Nerd Font Mono', w
   'D2CodingLigature Nerd Font Mono',
   'Noto Sans CJK KR'
 }
-config.dpi = 72
 config.font_size = 20
 
 -- key setting
