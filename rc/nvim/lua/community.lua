@@ -6,5 +6,6 @@
 return {
   "AstroNvim/astrocommunity",
   { import = "astrocommunity.motion.mini-surround" },
+  { import = "astrocommunity.note-taking.zk-nvim" },
   -- import/override with your plugins folder
 }
