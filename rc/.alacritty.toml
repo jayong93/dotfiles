@@ -1,0 +1,12 @@
+[font]
+size = 20.0
+
+[font.normal]
+family = "IosevkaTerm Nerd Font Mono"
+style = "Medium"
+
+[font.italic]
+style = "Medium Italic"
+
+[window]
+option_as_alt = "OnlyLeft"
