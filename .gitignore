@@ -1,2 +1,4 @@
 # config.fish should be for local-only configurations. (e.g. config only for office works)
 fish-config/config.fish
+
+rc/nvim/lazy-lock.json
