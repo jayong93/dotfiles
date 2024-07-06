@@ -75,6 +75,9 @@ return {
         ["<Leader>zo"] = { "<Cmd>ZkNotes { sort = { 'modified' } }<CR>", desc = "Open notes", noremap = true },
         ["<Leader>zt"] = { "<Cmd>ZkTags<CR>", desc = "Open notes associated with the selected tags", noremap = true },
         ["<Leader>zf"] = { "<Cmd>ZkNotes { sort = { 'modified' }, match = { vim.fn.input('Search: ') } }<CR>", desc = "Search for the notes matching a given query", noremap = true },
+
+        -- Spawn a terminal in a new tab
+        ["<Leader>tn"] = { "<Cmd>tabnew|term<CR>", desc = "Create a new tab with terminal", noremap = true },
       },
       v = {
         ["<Leader>zf"] = { ":'<,'>ZkMatch<CR>", desc = "Search for the notes matching the current visual selection", noremap = true },
