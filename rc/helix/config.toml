@@ -1,4 +1,4 @@
-theme = "edge_neon"
+theme = "catppuccin_mocha"
 
 [editor]
 line-number = "relative"
@@ -10,3 +10,6 @@ select = "underline"
 
 [editor.soft-wrap]
 enable = true
+
+[editor.lsp]
+display-inlay-hints = true
