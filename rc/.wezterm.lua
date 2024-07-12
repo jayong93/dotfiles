@@ -8,6 +8,10 @@ config.font = wezterm.font_with_fallback{{family='IosevkaTerm Nerd Font Mono', w
   'Noto Sans CJK KR'
 }
 config.font_size = 20
+config.freetype_load_target = "Light"
+config.freetype_render_target = "HorizontalLcd"
+config.freetype_load_flags = 'NO_HINTING'
+config.cell_width = 0.9
 
 -- key setting
 config.keys = {
