@@ -7,11 +7,27 @@ config.font = wezterm.font_with_fallback{{family='IosevkaTerm Nerd Font Mono', w
   'D2CodingLigature Nerd Font Mono',
   'Noto Sans CJK KR'
 }
-config.font_size = 20
+extra_keys = {}
+if wezterm.target_triple == "x86_64-unknown-linux-gnu" then
+  config.font_size = 14
+  config.use_ime = true
+  config.xim_im_name = "kime"
+  config.enable_wayland = false
+  extra_keys = {
+    {
+      key = 'v',
+      mods = 'CTRL',
+      action = wezterm.action.PasteFrom 'Clipboard'
+    }
+  }
+else
+  config.font_size = 20
+end
 config.freetype_load_target = "Light"
 config.freetype_render_target = "HorizontalLcd"
 config.freetype_load_flags = 'NO_HINTING'
 config.cell_width = 0.9
+
 
 -- key setting
 config.keys = {
@@ -24,6 +40,9 @@ config.keys = {
     },
   }
 }
+for i, key in ipairs(extra_keys) do
+  table.insert(config.keys, key)
+end
 config.key_tables = {
   mux = {
     {
