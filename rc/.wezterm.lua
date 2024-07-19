@@ -21,7 +21,7 @@ if wezterm.target_triple == "x86_64-unknown-linux-gnu" then
     }
   }
 else
-  config.font_size = 20
+  config.font_size = 22
 end
 config.freetype_load_target = "Light"
 config.freetype_render_target = "HorizontalLcd"
