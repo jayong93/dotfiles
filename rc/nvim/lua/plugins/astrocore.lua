@@ -3,6 +3,15 @@
 -- NOTE: We highly recommend setting up the Lua Language Server (`:LspInstall lua_ls`)
 --       as this provides autocomplete and documentation while editing
 
+-- vim.g.<key>
+-- configure global vim variables (vim.g)
+-- NOTE: `mapleader` and `maplocalleader` must be set in the AstroNvim opts or before `lazy.setup`
+-- This can be found in the `lua/lazy_setup.lua` file
+local opt_g = {}
+if vim.fn.filereadable("~/.pyenv/versions/nvim/bin/python") then
+  opt_g.python3_host_prog = "~/.pyenv/versions/nvim/bin/python"
+end
+
 ---@type LazySpec
 return {
   "AstroNvim/astrocore",
@@ -31,12 +40,7 @@ return {
         signcolumn = "auto", -- sets vim.opt.signcolumn to auto
         wrap = true, -- sets vim.opt.wrap
       },
-      g = { -- vim.g.<key>
-        -- configure global vim variables (vim.g)
-        -- NOTE: `mapleader` and `maplocalleader` must be set in the AstroNvim opts or before `lazy.setup`
-        -- This can be found in the `lua/lazy_setup.lua` file
-        python3_host_prog = "~/.pyenv/versions/nvim/bin/python"
-      },
+      g = opt_g,
     },
     -- Mappings can be configured through AstroCore as well.
     -- NOTE: keycodes follow the casing in the vimdocs. For example, `<Leader>` must be capitalized
