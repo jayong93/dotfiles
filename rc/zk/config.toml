@@ -8,5 +8,22 @@ filename = "{{format-date now '%Y-%m-%d'}}"
 extension = "md"
 template = "daily.md"
 
+[group.issue]
+paths = ["issues"]
+
+[group.issue.note]
+extension = "md"
+template = "issue.md"
+
+[group.impl]
+paths = ["impls"]
+
+[group.impl.note]
+extension = "md"
+template = "impl.md"
+
 [alias]
 daily = 'zk new --no-input "$ZK_NOTEBOOK_DIR/journal/daily"'
+issue = 'zk new "$ZK_NOTEBOOK_DIR/issues" $argv'
+impl = 'zk new "$ZK_NOTEBOOK_DIR/impls" $argv'
+ls = 'zk list $argv'
