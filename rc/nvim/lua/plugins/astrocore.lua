@@ -12,6 +12,16 @@ if vim.fn.filereadable("~/.pyenv/versions/nvim/bin/python") then
   opt_g.python3_host_prog = "~/.pyenv/versions/nvim/bin/python"
 end
 
+local opt_opt = { -- vim.opt.<key>
+  relativenumber = true, -- sets vim.opt.relativenumber
+  number = true, -- sets vim.opt.number
+  spell = false, -- sets vim.opt.spell
+  signcolumn = "auto", -- sets vim.opt.signcolumn to auto
+  wrap = true, -- sets vim.opt.wrap
+}
+opt_opt.diffopt = vim.opt.diffopt:get()
+table.insert(opt_opt.diffopt, "followwrap")
+
 ---@type LazySpec
 return {
   "AstroNvim/astrocore",
@@ -33,13 +43,7 @@ return {
     },
     -- vim options can be configured here
     options = {
-      opt = { -- vim.opt.<key>
-        relativenumber = true, -- sets vim.opt.relativenumber
-        number = true, -- sets vim.opt.number
-        spell = false, -- sets vim.opt.spell
-        signcolumn = "auto", -- sets vim.opt.signcolumn to auto
-        wrap = true, -- sets vim.opt.wrap
-      },
+      opt = opt_opt,
       g = opt_g,
     },
     -- Mappings can be configured through AstroCore as well.
