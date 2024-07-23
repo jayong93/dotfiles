@@ -8,5 +8,6 @@ return {
   { import = "astrocommunity.motion.mini-surround" },
   { import = "astrocommunity.note-taking.zk-nvim" },
   { import = "astrocommunity.colorscheme.catppuccin" },
+  { import = "astrocommunity.pack.jj" },
   -- import/override with your plugins folder
 }
