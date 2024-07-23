@@ -1,8 +1,5 @@
 ---@type LazySpec
 return {
   "tpope/vim-fugitive",
-  cmd = {
-    "Git",
-    "Gdiff"
-  }
+  event = "User AstroGitFile"
 }

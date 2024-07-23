@@ -21,6 +21,8 @@ local opt_opt = { -- vim.opt.<key>
 }
 opt_opt.diffopt = vim.opt.diffopt:get()
 table.insert(opt_opt.diffopt, "followwrap")
+table.insert(opt_opt.diffopt, "linematch:60")
+table.insert(opt_opt.diffopt, "algorithm:histogram")
 
 ---@type LazySpec
 return {
