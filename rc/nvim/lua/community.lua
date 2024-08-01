@@ -9,5 +9,9 @@ return {
   { import = "astrocommunity.note-taking.zk-nvim" },
   { import = "astrocommunity.colorscheme.catppuccin" },
   { import = "astrocommunity.pack.jj" },
+  {
+    "zschreur/telescope-jj.nvim",
+    enabled = false
+  },
   -- import/override with your plugins folder
 }
