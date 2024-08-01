@@ -1,5 +1,2 @@
-if which pyenv > /dev/null
-    status is-login; and pyenv init --path | source
-    status is-interactive; and pyenv init - | source
-    status is-interactive; and pyenv virtualenv-init - | source
-end
+set -Ux PYENV_ROOT $HOME/.pyenv
+fish_add_path --path $PYENV_ROOT/bin
