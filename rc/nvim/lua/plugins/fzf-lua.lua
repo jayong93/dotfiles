@@ -30,7 +30,7 @@ return {
       {"<Leader>jb", function() require'fzf-lua'.fzf_exec(
         vim.iter({
           "jj log",
-          "-r 'visible_heads()'",
+          "-r 'visible_heads() | branches()'",
           "-T", template,
           "--no-graph", "--color", "always"
         }):join(" "),
@@ -49,12 +49,11 @@ return {
             end
           }
         }
-      ) end, desc = "Find heads and copy the ref"},
-      {"<Leader>jB", function() require'fzf-lua'.fzf_live(
+      ) end, desc = "Find heads and branches"},
+      {"<Leader>jc", function() require'fzf-lua'.fzf_live(
         function (query)
-          local branch_q = vim.fn.shellescape(string.format('branches("%s") ~ empty()', query, query))
-          local desc_q = vim.fn.shellescape(string.format('description("%s") ~ empty()', query, query))
-          return vim.iter({ "jj log", "-T", template, "--no-graph", "--color", "always", "-r", branch_q, "-r", desc_q }):join(" ")
+          local q = vim.fn.shellescape(string.format('(branches("%s") | description("%s")) ~ empty()', query, query))
+          return vim.iter({ "jj log", "-T", template, "--no-graph", "--color", "always", "-r", q}):join(" ")
         end,
         {
           preview = {

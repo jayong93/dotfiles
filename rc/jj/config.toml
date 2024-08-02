@@ -1,0 +1,27 @@
+[snapshot]
+max-new-file-size = "3MiB"
+
+[user]
+name = "Jaeyong Choi"
+email = "jayong93@linecorp.com"
+
+[ui]
+merge-editor = "vimdiff"
+diff-editor = ["nvim", "-c", "DiffDirs $left $right"]
+editor = "nvim"
+default-command = "status"
+
+[ui.diff]
+tool = ["difft", "--color=always", "$left", "$right"]
+
+[merge-tools]
+
+[merge-tools.vimdiff]
+program = "nvim"
+
+[aliases]
+gf = ["git", "fetch", "--all-remotes"]
+
+[revset-aliases]
+'HEAD' = '@-'
+'MOD' = 'latest(::@ ~ empty())'
