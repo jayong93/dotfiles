@@ -23,6 +23,7 @@ merge-tool-edits-conflict-markers = true
 
 [aliases]
 gf = ["git", "fetch", "--all-remotes"]
+bs = ["branch", "set"]
 
 [revset-aliases]
 'HEAD' = '@-'
