@@ -52,7 +52,7 @@ return {
       ) end, desc = "Find heads and branches"},
       {"<Leader>jc", function() require'fzf-lua'.fzf_live(
         function (query)
-          local q = vim.fn.shellescape(string.format('(branches("%s") | description("%s")) ~ empty()', query, query))
+          local q = vim.fn.shellescape(string.format('(branches(regex:"%s") | description(regex:"%s")) ~ empty()', query, query))
           return vim.iter({ "jj log", "-T", template, "--no-graph", "--color", "always", "-r", q}):join(" ")
         end,
         {

@@ -10,6 +10,7 @@ merge-editor = "vimdiff"
 diff-editor = ["nvim", "-c", "DiffDirs $left $right"]
 editor = "nvim"
 default-command = "status"
+diff-instructions = false
 
 [ui.diff]
 tool = ["difft", "--color=always", "$left", "$right"]
@@ -18,6 +19,7 @@ tool = ["difft", "--color=always", "$left", "$right"]
 
 [merge-tools.vimdiff]
 program = "nvim"
+merge-tool-edits-conflict-markers = true
 
 [aliases]
 gf = ["git", "fetch", "--all-remotes"]
@@ -25,3 +27,6 @@ gf = ["git", "fetch", "--all-remotes"]
 [revset-aliases]
 'HEAD' = '@-'
 'MOD' = 'latest(::@ ~ empty())'
+
+[revsets]
+log = 'ancestors(branches() | remote_branches(), 3)::(@ | visible_heads())'
