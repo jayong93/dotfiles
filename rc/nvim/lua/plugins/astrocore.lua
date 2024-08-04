@@ -18,6 +18,7 @@ local opt_opt = { -- vim.opt.<key>
   spell = false, -- sets vim.opt.spell
   signcolumn = "auto", -- sets vim.opt.signcolumn to auto
   wrap = true, -- sets vim.opt.wrap
+  jumpoptions = "stack",
 }
 opt_opt.diffopt = vim.opt.diffopt:get()
 table.insert(opt_opt.diffopt, "followwrap")
