@@ -3,6 +3,36 @@ local template = [['if(self.branches(), self.branches().map(|b| if(b.remote(),b.
 local extract_ref = function (line)
   return vim.iter(vim.gsplit(line, " ", {plain=true})):next()
 end
+
+local make_popup = function (opts)
+  local opts = opts or {}
+  local Popup = require("nui.popup")
+  local default_opts = {
+    enter = true,
+    focusable = true,
+    border = {
+      style = "rounded",
+    },
+    position = "50%",
+    size = {
+      width = "80%",
+      height = "80%",
+    },
+  }
+  opts = vim.tbl_deep_extend('force', default_opts, opts)
+  return Popup(opts)
+end
+
+local run_jj_cmd = function (cmds)
+  local event = require("nui.utils.autocmd").event
+  local popup = make_popup()
+  popup:on(event.BufLeave, function ()
+    popup:unmount()
+  end)
+  popup:mount()
+  vim.fn.termopen(cmds)
+end
+
 local jj_actions = {
   ["default"] = function (selected)
     vim.fn.setreg("+", extract_ref(selected[1]))
@@ -10,21 +40,10 @@ local jj_actions = {
   ["ctrl-r"] = function (selected)
     local ref = (extract_ref(selected[1]))
     local Input = require("nui.input")
-    local Popup = require("nui.popup")
     local event = require("nui.utils.autocmd").event
-    local popup = Popup({
-      enter = true,
-      focusable = true,
-      border = {
-        style = "rounded",
-      },
-      position = "50%",
-      size = {
-        width = "80%",
-        height = "60%",
-      },
-    })
+    local popup = make_popup()
     local input = Input({
+      enter = true,
       position = "50%",
       size = {
         width = "50%",
@@ -47,13 +66,7 @@ local jj_actions = {
           popup:unmount()
         end)
         popup:mount()
-        vim.system(vim.print({vim.o.shell, vim.o.shellcmdflag, cmd}), {text=true},
-          vim.schedule_wrap(
-            function (o)
-              vim.api.nvim_buf_set_lines(popup.bufnr, 0, 0, false, vim.list_extend(vim.split(o.stdout, "\n"), vim.split(o.stderr, "\n")))
-            end
-          )
-        )
+        vim.fn.termopen({vim.o.shell, vim.o.shellcmdflag, cmd})
       end,
     })
     input:on(event.BufLeave, function ()
@@ -129,6 +142,16 @@ return {
           actions = jj_actions,
         }
       ) end, desc = "Find commits"},
+      {
+        "<Leader>jd",
+        function() run_jj_cmd({"jj", "diff"}) end,
+        desc = "Show diff of current commit"
+      },
+      {
+        "<Leader>jl",
+        function() run_jj_cmd({"jj", "log"}) end,
+        desc = "Show log"
+      },
     }
   },
   {
