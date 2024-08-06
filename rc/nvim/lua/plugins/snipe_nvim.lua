@@ -3,6 +3,6 @@ return {
   "leath-dub/snipe.nvim",
   opts = {},
   keys = {
-    {"<Leader>fb", function() require("snipe").create_buffer_menu_toggler() end, desc="Find buffer"}
+    {"<Leader>fb", function() require("snipe").open_buffer_menu() end, desc="Find buffer"}
   }
 }
