@@ -3,7 +3,7 @@ max-new-file-size = "3MiB"
 
 [user]
 name = "Jaeyong Choi"
-email = "jayong93@linecorp.com"
+email = "jayong93@gmail.com"
 
 [ui]
 merge-editor = "vimdiff"
@@ -25,6 +25,7 @@ merge-tool-edits-conflict-markers = true
 gf = ["git", "fetch", "--all-remotes"]
 bs = ["branch", "set"]
 push = ["git", "push"]
+fetch = ["git", "fetch"]
 
 [revset-aliases]
 'HEAD' = '@-'
