@@ -26,6 +26,7 @@ gf = ["git", "fetch", "--all-remotes"]
 bs = ["branch", "set"]
 push = ["git", "push"]
 fetch = ["git", "fetch"]
+track = ["branch", "track"]
 
 [revset-aliases]
 'HEAD' = '@-'

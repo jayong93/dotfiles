@@ -1,4 +1,4 @@
---@type LazySpec
+---@type LazySpec
 return {
   {
     "jayong93/diffdirs.nvim",
