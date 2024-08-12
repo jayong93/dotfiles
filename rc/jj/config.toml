@@ -7,7 +7,7 @@ email = "jayong93@gmail.com"
 
 [ui]
 merge-editor = "vimdiff"
-diff-editor = ["nvim", "-c", "DiffDirs $left $right"]
+diff-editor = ["nvim", "-c", "DiffDirs $left $right $output"]
 editor = "nvim"
 default-command = "status"
 diff-instructions = false
