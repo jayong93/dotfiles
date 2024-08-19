@@ -104,8 +104,8 @@ mkdir ~/.cache/starship
 starship init nu | save -f ~/.cache/starship/init.nu
 mkdir ~/.cache/zoxide
 zoxide init nushell | save -f ~/.cache/zoxide/zoxide.nu
-mkdir ~/.cache/jj
-jj util completion nushell | save -f ~/.cache/jj/completion.nu
+mkdir ~/.cache/carapace
+carapace _carapace nushell | save -f ~/.cache/carapace/init.nu
 
 $env.EDITOR = nvim
 $env.CARGO_HOME = ($env.HOME | path join .cargo)

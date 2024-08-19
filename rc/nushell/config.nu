@@ -893,7 +893,7 @@ $env.config = {
 
 use ~/.cache/starship/init.nu
 source ~/.cache/zoxide/zoxide.nu
-source ~/.cache/jj/completion.nu
+source ~/.cache/carapace/init.nu
 
 alias vi = nvim
 alias lg = lazygit
