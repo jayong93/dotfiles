@@ -9,6 +9,7 @@ return {
   { import = "astrocommunity.note-taking.zk-nvim" },
   { import = "astrocommunity.colorscheme.catppuccin" },
   { import = "astrocommunity.pack.jj" },
+  { import = "astrocommunity.pack.just" },
   {
     "zschreur/telescope-jj.nvim",
     enabled = false

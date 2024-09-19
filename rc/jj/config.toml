@@ -23,14 +23,14 @@ merge-tool-edits-conflict-markers = true
 
 [aliases]
 gf = ["git", "fetch", "--all-remotes"]
-bs = ["branch", "set"]
+bs = ["bookmark", "set"]
 push = ["git", "push"]
 fetch = ["git", "fetch"]
-track = ["branch", "track"]
+track = ["bookmark", "track"]
 
 [revset-aliases]
 'HEAD' = '@-'
 'MOD' = 'latest(::@ ~ empty())'
 
 [revsets]
-log = 'ancestors(branches() | remote_branches(), 3)::(@ | visible_heads())'
+log = 'ancestors(bookmarks() | remote_bookmarks(), 3)::(@ | visible_heads())'
