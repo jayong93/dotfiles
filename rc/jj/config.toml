@@ -31,6 +31,3 @@ track = ["bookmark", "track"]
 [revset-aliases]
 'HEAD' = '@-'
 'MOD' = 'latest(::@ ~ empty())'
-
-[revsets]
-log = 'ancestors(bookmarks() | remote_bookmarks(), 3)::(@ | visible_heads())'
