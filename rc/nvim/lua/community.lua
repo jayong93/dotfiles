@@ -8,11 +8,11 @@ return {
   { import = "astrocommunity.motion.mini-surround" },
   { import = "astrocommunity.note-taking.zk-nvim" },
   { import = "astrocommunity.colorscheme.catppuccin" },
-  { import = "astrocommunity.pack.jj" },
+  -- { import = "astrocommunity.pack.jj" },
   { import = "astrocommunity.pack.just" },
-  {
-    "zschreur/telescope-jj.nvim",
-    enabled = false
-  },
+  -- {
+  --   "zschreur/telescope-jj.nvim",
+  --   enabled = false
+  -- },
   -- import/override with your plugins folder
 }

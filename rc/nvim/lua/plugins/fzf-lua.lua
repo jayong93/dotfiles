@@ -107,60 +107,60 @@ return {
       -- LSP keymap
       {"<Leader>ls", function() require'fzf-lua'.lsp_document_symbols() end, desc = "Find document symbols"},
 
-      -- JJ keymap
-      {"<Leader>jb", function() require'fzf-lua'.fzf_exec(
-        vim.iter({
-          "jj log",
-          "-r 'visible_heads() | branches()'",
-          "-T", template,
-          "--no-graph", "--color", "always"
-        }):join(" "),
-        {
-          preview = {
-            type = "cmd",
-            fn = function (items)
-              local ref = vim.iter(vim.gsplit(items[1], " ", {plain=true})):next()
-              return string.format("jj log -r '::%s' -n 1000 --color always", ref)
-            end
-          },
-          actions = jj_actions,
-        }
-      ) end, desc = "Find heads and branches"},
-      {"<Leader>jc", function() require'fzf-lua'.fzf_live(
-        function (query)
-          local q = vim.fn.shellescape(string.format('(branches(regex:"%s") | description(regex:"%s")) ~ empty()', query, query))
-          return vim.iter({ "jj log", "-T", template, "--no-graph", "--color", "always", "-r", q}):join(" ")
-        end,
-        {
-          preview = {
-            type = "cmd",
-            fn = function (items)
-              local ref = vim.iter(vim.gsplit(items[1], " ", {plain=true})):next()
-              return string.format("jj show -r '%s' --color always", ref)
-            end
-          },
-          actions = jj_actions,
-        }
-      ) end, desc = "Find commits"},
-      {
-        "<Leader>jd",
-        function() run_jj_cmd({"jj", "diff"}) end,
-        desc = "Show diff of current commit"
-      },
-      {
-        "<Leader>jl",
-        function() run_jj_cmd({"jj", "log"}) end,
-        desc = "Show log"
-      },
+      -- -- JJ keymap
+      -- {"<Leader>jb", function() require'fzf-lua'.fzf_exec(
+      --   vim.iter({
+      --     "jj log",
+      --     "-r 'visible_heads() | branches()'",
+      --     "-T", template,
+      --     "--no-graph", "--color", "always"
+      --   }):join(" "),
+      --   {
+      --     preview = {
+      --       type = "cmd",
+      --       fn = function (items)
+      --         local ref = vim.iter(vim.gsplit(items[1], " ", {plain=true})):next()
+      --         return string.format("jj log -r '::%s' -n 1000 --color always", ref)
+      --       end
+      --     },
+      --     actions = jj_actions,
+      --   }
+      -- ) end, desc = "Find heads and branches"},
+      -- {"<Leader>jc", function() require'fzf-lua'.fzf_live(
+      --   function (query)
+      --     local q = vim.fn.shellescape(string.format('(branches(regex:"%s") | description(regex:"%s")) ~ empty()', query, query))
+      --     return vim.iter({ "jj log", "-T", template, "--no-graph", "--color", "always", "-r", q}):join(" ")
+      --   end,
+      --   {
+      --     preview = {
+      --       type = "cmd",
+      --       fn = function (items)
+      --         local ref = vim.iter(vim.gsplit(items[1], " ", {plain=true})):next()
+      --         return string.format("jj show -r '%s' --color always", ref)
+      --       end
+      --     },
+      --     actions = jj_actions,
+      --   }
+      -- ) end, desc = "Find commits"},
+      -- {
+      --   "<Leader>jd",
+      --   function() run_jj_cmd({"jj", "diff"}) end,
+      --   desc = "Show diff of current commit"
+      -- },
+      -- {
+      --   "<Leader>jl",
+      --   function() run_jj_cmd({"jj", "log"}) end,
+      --   desc = "Show log"
+      -- },
     }
   },
-  {
-    "folke/which-key.nvim",
-    opts = {
-      spec = {
-        {"<Leader>f", group = "Find something"},
-        {"<Leader>j", group = "JJ"},
-      }
-    }
-  }
+  -- {
+  --   "folke/which-key.nvim",
+  --   opts = {
+  --     spec = {
+  --       {"<Leader>f", group = "Find something"},
+  --       {"<Leader>j", group = "JJ"},
+  --     }
+  --   }
+  -- }
 }
