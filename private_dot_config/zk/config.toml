@@ -1,0 +1,29 @@
+[group.daily]
+# Directories listed here will automatically use this group when creating notes.
+paths = ["journal/daily"]
+
+[group.daily.note]
+# %Y-%m-%d is actually the default format, so you could use {{format-date now}} instead.
+filename = "{{format-date now '%Y-%m-%d'}}"
+extension = "md"
+template = "daily.md"
+
+[group.issue]
+paths = ["issues"]
+
+[group.issue.note]
+extension = "md"
+template = "issue.md"
+
+[group.impl]
+paths = ["impls"]
+
+[group.impl.note]
+extension = "md"
+template = "impl.md"
+
+[alias]
+daily = 'zk new --no-input "$ZK_NOTEBOOK_DIR/journal/daily"'
+issue = 'zk new "$ZK_NOTEBOOK_DIR/issues" $argv'
+impl = 'zk new "$ZK_NOTEBOOK_DIR/impls" $argv'
+ls = 'zk list $argv'

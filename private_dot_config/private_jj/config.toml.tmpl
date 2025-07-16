@@ -1,0 +1,35 @@
+[snapshot]
+max-new-file-size = "3MiB"
+
+[user]
+name = "Jaeyong Choi"
+email = {{ .email | quote }}
+
+[ui]
+# merge-editor = "vimdiff"
+editor = "nvim"
+default-command = "status"
+diff-instructions = false
+diff-formatter = ["difft", "--color=always", "$left", "$right"]
+
+[merge-tools]
+
+[merge-tools.vimdiff]
+program = "nvim"
+edit-args = ["-c", "DiffDirs $left $right"]
+merge-args = ["-c", "DiffDirs $left $right $output"]
+merge-tool-edits-conflict-markers = true
+
+[aliases]
+gf = ["git", "fetch", "--all-remotes"]
+bs = ["bookmark", "set"]
+push = ["git", "push"]
+fetch = ["git", "fetch"]
+track = ["bookmark", "track"]
+
+[revset-aliases]
+'HEAD' = '@-'
+'MOD' = 'latest(::@ ~ empty())'
+
+[git]
+track-default-bookmark-on-clone = true

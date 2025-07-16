@@ -1,0 +1,48 @@
+[core]
+    pager = delta
+    editor = nvim
+
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    navigate = true
+    light = false
+    side-by-side
+
+[merge]
+	conflictStyle = zdiff3
+
+[diff]
+    tool = difftastic
+    colorMoved = default
+	algorithm = histogram
+[difftool]
+    prompt = false
+[difftool "difftastic"]
+    cmd = difft "$LOCAL" "$REMOTE"
+[pager]
+    difftool = true
+
+[user]
+	name = Jaeyong Choi
+	email = {{ .email | quote }}
+
+[alias]
+    l = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit
+    files = "!f() { REVIEW_BASE=${1:-master}; git diff --name-only $(git merge-base HEAD \"$REVIEW_BASE\"); }; f"
+    review = "!f() { REVIEW_BASE=${1:-master}; nvim -c \"tabdo Gvdiffsplit $REVIEW_BASE\" -p $(git files $REVIEW_BASE); }; f"
+    pr  = "!f() { git fetch -fu ${2:-origin} refs/pull/$1/head:pr/$1 && git checkout pr/$1; }; f"
+    pr-clean = "!git for-each-ref refs/heads/pr/* --format='%(refname)' | while read ref ; do branch=${ref#refs/heads/} ; git branch -D $branch ; done"
+
+[pull]
+	rebase = true
+
+[safe]
+	directory = /Users/user/legy-server
+; [core]
+; 	editor = code --wait
+[rebase]
+	autoStash = true
+[init]
+	defaultBranch = main
