@@ -3,7 +3,7 @@ local wezterm = require 'wezterm'
 local config = {}
 
 -- font setting
-config.font = wezterm.font_with_fallback{{family='IosevkaTerm Nerd Font Mono', weight="Medium"},
+config.font = wezterm.font_with_fallback{{family='IosevkaTerm Nerd Font Mono', weight="Bold"},
   'D2CodingLigature Nerd Font Mono',
   'Noto Sans CJK KR'
 }
