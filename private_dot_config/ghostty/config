@@ -1,0 +1,5 @@
+font-family = "IosevkaTerm Nerd Font Mono"
+font-style = "Bold"
+font-size = 22
+
+keybind = alt+enter=toggle_fullscreen
