@@ -94,6 +94,7 @@ return {
     keys = {
       {"<Leader>fa", function() require'fzf-lua'.files({cwd="~/.config/nvim"}) end, desc = "Find config files"},
       {"<Leader>ff", function() require'fzf-lua'.files() end, desc = "Find files"},
+      {"<Leader>fb", function() require'fzf-lua'.buffers() end, desc = "Find buffers"},
       {"<Leader>f/", function() require'fzf-lua'.blines({resume=true}) end, desc = "Find words in current buffer"},
       {"<Leader>f?", function() require'fzf-lua'.lines({resume=true}) end, desc = "Find words in open buffers"},
       {"<Leader>fw", function() require'fzf-lua'.live_grep({resume=true}) end, desc = "Find words"},
