@@ -38,7 +38,7 @@ return {
     },
     -- enable servers that you already have installed without mason
     servers = {
-      -- "pyright"
+      "ty"
     },
     -- customize language server configuration options passed to `lspconfig`
     ---@diagnostic disable: missing-fields
@@ -61,7 +61,32 @@ return {
           },
         },
       },
+      -- Hotfix for using `ty` LSP with `nvim-lspconfig` 2.1 version.
+      -- It would not be needed since AstroNvim v6.
+      -- Refer:
+      -- - https://github.com/mason-org/mason-lspconfig.nvim/issues/642
+      -- - https://github.com/AstroNvim/AstroNvim/discussions/2865
+      ty = {
+        cmd = { "ty", "server" },
+        filetypes = { "python" },
+        root_dir = require("lspconfig.util").root_pattern(
+          "ty.toml",
+          "pyproject.toml",
+          "setup.py",
+          "setup.cfg",
+          "requirements.txt",
+          ".git"
+        ),
+      },
     },
+    -- mason_lspconfig = { -- HOT PATCH MASON-LSPCONFIG
+    --   servers = {
+    --     ty = {
+    --       package = "ty",
+    --       filetypes = { "python" },
+    --     },
+    --   },
+    -- },
     -- customize how language servers are attached
     handlers = {
       -- a function without a key is simply the default handler, functions take two parameters, the server name and the configured options table for that server
