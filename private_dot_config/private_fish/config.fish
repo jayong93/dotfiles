@@ -14,6 +14,7 @@ if status is-login
     fish_add_path --path "$HOME/.cache/rebar3/bin"
     fish_add_path --path "$HOME/.cargo/bin"
     fish_add_path --path "$HOME/.kerl/installations/$OTP_VSN/.cache/rebar3/bin"
+    fish_add_path --path "$HOME/.flava/bin"
     # if test -z (pgrep ssh-agent | string collect)
     #     eval (ssh-agent -c)
     #     set -Ux SSH_AUTH_SOCK $SSH_AUTH_SOCK
