@@ -89,7 +89,8 @@ return {
           ["ctrl-g"] = {require("fzf-lua.actions").toggle_ignore},
           ["ctrl-r"] = {require("fzf-lua.actions").grep_lgrep},
         }
-      }
+      },
+      'skim',
     },
     keys = {
       {"<Leader>fa", function() require'fzf-lua'.files({cwd="~/.config/nvim"}) end, desc = "Find config files"},
