@@ -3,10 +3,11 @@ local wezterm = require 'wezterm'
 local config = {}
 
 -- font setting
-config.font = wezterm.font_with_fallback{{family='IosevkaTerm Nerd Font Mono', weight="Bold"},
-  'D2CodingLigature Nerd Font Mono',
+config.font = wezterm.font_with_fallback{{family='UbuntuMono Nerd Font Mono', weight="Medium"},
+  'IosevkaTerm Nerd Font Mono',
   'Noto Sans CJK KR'
 }
+
 extra_keys = {}
 if wezterm.target_triple == "x86_64-unknown-linux-gnu" then
   config.font_size = 14
@@ -21,7 +22,8 @@ if wezterm.target_triple == "x86_64-unknown-linux-gnu" then
     }
   }
 else
-  config.font_size = 22
+  config.dpi = 144
+  config.font_size = 12
 end
 config.freetype_load_target = "Light"
 config.freetype_render_target = "HorizontalLcd"
