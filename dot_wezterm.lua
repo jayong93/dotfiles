@@ -10,10 +10,8 @@ config.font = wezterm.font_with_fallback{{family='IosevkaTerm Nerd Font Mono', w
 
 extra_keys = {}
 if wezterm.target_triple == "x86_64-unknown-linux-gnu" then
-  config.font_size = 14
+  config.font_size = 15
   config.use_ime = true
-  config.xim_im_name = "kime"
-  config.enable_wayland = false
   extra_keys = {
     {
       key = 'v',
