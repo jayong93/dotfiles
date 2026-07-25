@@ -1,5 +1,9 @@
 font-family = "IosevkaTerm Nerd Font Mono"
-font-style = "Bold"
-font-size = 22
+adjust-cell-width = -10%
+font-size = 25
+
+macos-option-as-alt = true
+
+theme = Catppuccin Mocha
 
 keybind = alt+enter=toggle_fullscreen

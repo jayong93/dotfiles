@@ -20,13 +20,13 @@ if wezterm.target_triple == "x86_64-unknown-linux-gnu" then
     }
   }
 else
-  config.font_size = 25
+  config.font_size = 23.5
 end
-config.freetype_load_target = "Light"
-config.freetype_render_target = "HorizontalLcd"
-config.freetype_load_flags = 'NO_HINTING'
-config.cell_width = 0.9
-config.line_height = 0.9
+-- config.freetype_load_target = "Light"
+-- config.freetype_render_target = "HorizontalLcd"
+-- config.freetype_load_flags = 'NO_HINTING'
+-- config.cell_width = 0.9
+-- config.line_height = 1
 
 
 -- key setting
